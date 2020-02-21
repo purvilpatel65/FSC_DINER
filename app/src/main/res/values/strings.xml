@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">FSC_DINER</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_email">Confirm Email</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="history_header">Your previously purchased items will appear below</string>
+
+    <string name="login">Login to FSC Diner</string>
+    <string name="no_account">Don\'t have an account? Sign up</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
