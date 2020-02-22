@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "669535710078",
+    "firebase_url": "https://fsc-diner.firebaseio.com",
+    "project_id": "fsc-diner",
+    "storage_bucket": "fsc-diner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:669535710078:android:8143186c755c0e361f212f",
+        "android_client_info": {
+          "package_name": "com.example.fsc_diner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "669535710078-ki8c4gb7828mfve3pksgs53lestv96u5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fsc_diner",
+            "certificate_hash": "8ca127b6191c18939c695d3f5ea83c9a06617d97"
+          }
+        },
+        {
+          "client_id": "669535710078-j6mdmfintpvftamm43to9b1s6c8heio8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAs9tJKDn4J167nL7rjJbrdR6g1rCl2i8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "669535710078-j6mdmfintpvftamm43to9b1s6c8heio8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
