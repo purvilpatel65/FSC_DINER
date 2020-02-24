@@ -8,4 +8,25 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="TextHighlight">
+        <item name="android:shadowColor">@android:color/white</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">7</item>
+        <item name="android:elevation">20dp</item>
+    </style>
+
+    <style name="credentials">
+        <item name="android:background">@drawable/edit_text_border</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:elevation">20dp</item>
+    </style>
+
 </resources>
