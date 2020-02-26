@@ -57,7 +57,13 @@
 
     <string name="yescc">Yes, clear cart</string>
     <string name="nocc">No, return to cart</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_menu">Menu</string>
+    <string name="title_current_order">Your Order</string>
+    <string name="title_previous_order">History</string>
+    <string name="title_profile">Account</string>
+    <string name="checkout_bag">Checkout</string>
+
+
+
+
 </resources>

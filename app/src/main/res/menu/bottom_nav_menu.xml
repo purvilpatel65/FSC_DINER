@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+
+
+
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:id="@+id/navigation_OrderHistory"
+        android:icon="@drawable/ic_order_history_black_24dp"
+        android:title="@string/title_previous_order" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
+        android:id="@+id/navigation_CurrentOrders"
+        android:icon="@drawable/ic_reorder_black_24dp"
+        android:title="@string/title_current_order" />
+
+    <item
+        android:id="@+id/navigation_menu"
+        android:icon="@drawable/ic_local_dining_black_24dp"
+        android:title="@string/title_menu" />
+
+    <item
+        android:id="@+id/navigation_account"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="@string/title_profile" />
+
+    <item
+        android:id="@+id/navigation_CheckOutBag"
+        android:icon="@drawable/ic_check_out_bag_24px"
+        android:title="@string/checkout_bag" />
+
 
 </menu>
