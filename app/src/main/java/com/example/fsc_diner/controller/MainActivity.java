@@ -1,11 +1,14 @@
-package com.example.fsc_diner;
+package com.example.fsc_diner.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.fsc_diner.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -34,5 +37,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void onClickMenuCardViews(View view) {
 
+        String restaurantName = view.getTag().toString();
+
+        Intent intent = new Intent(getApplicationContext(), RestaurantFoodMenu.class);
+        intent.putExtra("RestaurantName", restaurantName);
+        startActivity(intent);
+    }
 }

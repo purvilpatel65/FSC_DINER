@@ -1,4 +1,4 @@
-package com.example.fsc_diner;
+package com.example.fsc_diner.controller;
 
 // Class contains necessary member variables for storing User Information into the Database
 public class UserInformation {

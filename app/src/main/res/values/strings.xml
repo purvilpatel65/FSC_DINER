@@ -62,8 +62,8 @@
     <string name="title_previous_order">History</string>
     <string name="title_profile">Account</string>
     <string name="checkout_bag">Checkout</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
 
-
-
+    <string name="restaurant_1_name">Burger Studio</string>
 
 </resources>
