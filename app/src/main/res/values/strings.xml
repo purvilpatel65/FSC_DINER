@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FSC_DINER</string>
+    <string name="app_name">FSC Diner</string>
     <string name="about_us_version">Version: 1.0.1</string>
     <string name="account_info">Account Information</string>
     <string name="action_settings">Settings</string>
@@ -19,9 +19,10 @@
 
     <string name="last_name">Last Name</string>
     <string name="login">Login to FSC Dine</string>
-    <string name="logout1">Log out from Barback?</string>
+    <string name="logout1">Log out from FSC Dine?</string>
     <string name="logout2">Yes, log out</string>
     <string name="logout3">No, stay signed in</string>
+    <string name="logout4">You have successfully logged out!</string>
 
     <string name="no_items">You have no items in your cart</string>
     <string name="menu_about_us">About Us</string>
@@ -45,6 +46,7 @@
     <string name="registration2">Sign Up</string>
 
     <string name="sign_in_unsuccessful">Sign-In Unsuccessful, Please Try Again</string>
+    <string name="sign_in_successful">You are now logged in!</string>
 
     <string name="abv">ABV:</string>
     <string name="calories">Calories:</string>

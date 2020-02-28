@@ -50,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, R.string.sign_in_unsuccessful, Toast.LENGTH_SHORT).show();
                 } else {
                     FirebaseUser currentUser = mFireBaseAuth.getCurrentUser();
+                    Toast.makeText(LoginActivity.this, R.string.sign_in_successful, Toast.LENGTH_SHORT).show();
                     updateUI(currentUser);
                 }
             }
