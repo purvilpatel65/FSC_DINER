@@ -15,6 +15,7 @@
     <string name="hint_password">Password</string>
     <string name="hint_confirm_email">Confirm Email</string>
     <string name="hint_confirm_password">Confirm Password</string>
+    <string name="hint_employee_code">Employee Registration Code</string>
     <string name="history_header">Your previously purchased items will appear below</string>
 
     <string name="last_name">Last Name</string>
@@ -38,12 +39,16 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="no_account">Don\'t have an account? Sign up</string>
+    <string name="no_account2">Need to register as an Employee?</string>
     <string name="order_placed">Your order has been placed!</string>
     <string name="profile_picture">Profile Picture</string>
 
     <string name="recommend">Check out the featured drink of the day</string>
     <string name="registration">Create Account</string>
-    <string name="registration2">Sign Up</string>
+    <string name="registration2">User Registration</string>
+    <string name="registration3">Employee Registration</string>
+    <string name="return_to_login">Return to Login Page</string>
+
 
     <string name="sign_in_unsuccessful">Sign-In Unsuccessful, Please Try Again</string>
     <string name="sign_in_successful">You are now logged in!</string>

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.fsc_diner.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Pattern;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class UserRegistration extends AppCompatActivity {
     TextView firstNameTV, lastNameTV, emailTV, passwordTV, confirmPasswordTV;
     FirebaseAuth mFirebaseAuth;
     OnCompleteListener onCompleteListener;
@@ -35,7 +36,7 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(R.layout.activity_user_registration);
         mFirebaseAuth = FirebaseAuth.getInstance();
         firstNameTV = findViewById(R.id.firstNameRegistration);
         lastNameTV = findViewById(R.id.lastNameRegistration);
@@ -46,15 +47,16 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task task) {
                 if (!task.isSuccessful()) {
-                    Toast.makeText(RegistrationActivity.this, "SignUp Unsuccessful, Please Try Again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserRegistration.this, "SignUp Unsuccessful, Please Try Again", Toast.LENGTH_SHORT).show();
                 } else {
                     String email = emailTV.getText().toString();
                     String firstName = firstNameTV.getText().toString();
                     String lastName = lastNameTV.getText().toString();
-                    UserInformation user = new UserInformation(email, firstName, lastName);
+                    UserInformation user = new UserInformation(email, firstName, lastName, "Customer");
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
-                    Intent i = new Intent(RegistrationActivity.this, LoginActivity.class);
+                    Intent i = new Intent(UserRegistration.this, LoginActivity.class);
                     startActivity(i);
+                    Animatoo.animateFade(UserRegistration.this);
                     finish();
                 }
             }
@@ -66,6 +68,7 @@ public class RegistrationActivity extends AppCompatActivity {
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         // Animation effect is used
+        Animatoo.animateFade(this);
         finish();
     }
 
@@ -203,5 +206,12 @@ public class RegistrationActivity extends AppCompatActivity {
         } else {
             return false;
         }
+    }
+
+    public void employeeRegistration(View view){
+        Intent i = new Intent(UserRegistration.this, EmployeeRegistration.class);
+        startActivity(i);
+        Animatoo.animateSlideUp(this);
+        finish();
     }
 }

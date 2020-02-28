@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/green_gradient_background"
-    tools:context=".controller.RegistrationActivity">
+    tools:context=".controller.EmployeeRegistration">
 
     <Button
         android:id="@+id/button2"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:fontFamily="sans-serif-condensed"
-        android:text="@string/registration2"
+        android:text="@string/registration3"
         android:textColor="@android:color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,32 +46,36 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/returnToLoginPageTV"
+        style="@style/TextHighlight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:onClick="returnToLogin"
+        android:text="@string/return_to_login"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="340dp"
-        android:layout_height="315dp"
+        android:layout_height="365dp"
         android:layout_marginTop="35dp"
         android:background="@drawable/white_gradient_color"
+        android:fontFamily="sans-serif-condensed"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9">
 
         <EditText
-            android:id="@+id/firstNameRegistration"
-            style="@style/credentials"
-            android:layout_width="300dp"
-            android:layout_height="38dp"
-            android:background="@drawable/rounded_text_border"
-            android:drawableStart="@drawable/ic_person_outline"
-            android:ems="10"
-            android:hint="@string/first_name"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/lastNameRegistration"
+            android:id="@+id/employeeRegLastName"
             style="@style/credentials"
             android:layout_width="300dp"
             android:layout_height="38dp"
@@ -82,11 +86,12 @@
             android:hint="@string/last_name"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/firstNameRegistration" />
+            app:layout_constraintTop_toBottomOf="@+id/employeeRegFirstName" />
 
         <EditText
-            android:id="@+id/emailRegistration"
+            android:id="@+id/employeeRegEmail"
             style="@style/credentials"
             android:layout_width="300dp"
             android:layout_height="38dp"
@@ -97,11 +102,12 @@
             android:hint="@string/hint_email"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lastNameRegistration" />
+            app:layout_constraintTop_toBottomOf="@+id/employeeRegLastName" />
 
         <EditText
-            android:id="@+id/passwordRegistration"
+            android:id="@+id/employeeRegPassword"
             style="@style/credentials"
             android:layout_width="300dp"
             android:layout_height="38dp"
@@ -112,11 +118,28 @@
             android:hint="@string/hint_password"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailRegistration" />
+            app:layout_constraintTop_toBottomOf="@+id/employeeRegEmail" />
 
         <EditText
-            android:id="@+id/confirmPasswordRegistration"
+            android:id="@+id/employeeRegFirstName"
+            style="@style/credentials"
+            android:layout_width="300dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/rounded_text_border"
+            android:drawableStart="@drawable/ic_person_outline"
+            android:ems="10"
+            android:hint="@string/first_name"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/employeeRegConfirmPassword"
             style="@style/credentials"
             android:layout_width="300dp"
             android:layout_height="38dp"
@@ -128,7 +151,23 @@
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordRegistration" />
+            app:layout_constraintTop_toBottomOf="@+id/employeeRegPassword" />
+
+        <EditText
+            android:id="@+id/employeeRegCode"
+            style="@style/credentials"
+            android:layout_width="300dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_text_border"
+            android:drawableStart="@drawable/ic_key_outline"
+            android:ems="10"
+            android:hint="@string/hint_employee_code"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/employeeRegConfirmPassword" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

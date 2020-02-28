@@ -6,12 +6,14 @@ public class UserInformation {
     public String firstName;
     public String lastName;
     public String fullName;
+    public String userType;
 
     // Constructor used for email and password login users
-    public UserInformation(String email, String firstName, String lastName){
+    public UserInformation(String email, String firstName, String lastName, String userType){
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.userType = userType;
     }
 
     // Constructor used for facebook login users
@@ -33,6 +35,11 @@ public class UserInformation {
     }
 
     public String getFullName(){
-        return fullName; }
+        return fullName;
+    }
+
+    public String getUserType(){
+        return userType;
+    }
 
 }

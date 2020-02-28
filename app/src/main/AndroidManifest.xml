@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.RestaurantFoodMenu"></activity>
-        <activity android:name=".controller.RegistrationActivity" />
+        <activity android:name=".controller.EmployeeRegistration"></activity>
+        <activity android:name=".controller.RestaurantFoodMenu" />
+        <activity android:name=".controller.UserRegistration" />
         <activity
             android:name=".controller.SplashScreen"
             android:screenOrientation="portrait">
@@ -20,8 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.LoginActivity"/>
-
+        <activity android:name=".controller.LoginActivity" />
         <activity android:name=".controller.MainActivity" />
 
         <meta-data
