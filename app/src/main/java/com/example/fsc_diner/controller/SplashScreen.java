@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.fsc_diner.R;
 
 public class SplashScreen extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 startActivity(new Intent(SplashScreen.this, LoginActivity.class));
+                Animatoo.animateZoom(SplashScreen.this);
                 finish();
             }
         }, 3000);

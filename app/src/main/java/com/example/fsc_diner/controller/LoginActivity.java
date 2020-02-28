@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.fsc_diner.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -71,8 +72,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void registrationStart(View view) {
-        Intent i = new Intent(this, RegistrationActivity.class);
+        Intent i = new Intent(this, UserRegistration.class);
         startActivity(i);
+        Animatoo.animateFade(this);
         finish();
     }
 
@@ -130,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
             Intent i = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(i);
+            Animatoo.animateFade(this);
             finish();
         } else {
             recreate();
