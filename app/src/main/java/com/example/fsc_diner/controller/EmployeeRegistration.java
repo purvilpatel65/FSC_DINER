@@ -56,11 +56,21 @@ public class EmployeeRegistration extends AppCompatActivity {
             public void onComplete(@NonNull Task task) {
                 if (!task.isSuccessful()) {
                     Toast.makeText(EmployeeRegistration.this, "SignUp Unsuccessful, Please Try Again", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if(task.isSuccessful() && validateCode().equals("emp")){
                     String email = emailTV.getText().toString();
                     String firstName = firstNameTV.getText().toString();
                     String lastName = lastNameTV.getText().toString();
                     UserInformation employee = new UserInformation(email, firstName, lastName, "Employee");
+                    FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(employee);
+                    Intent i = new Intent(EmployeeRegistration.this, LoginActivity.class);
+                    startActivity(i);
+                    Animatoo.animateFade(EmployeeRegistration.this);
+                    finish();
+                } else if(task.isSuccessful() && validateCode().equals("man")){
+                    String email = emailTV.getText().toString();
+                    String firstName = firstNameTV.getText().toString();
+                    String lastName = lastNameTV.getText().toString();
+                    UserInformation employee = new UserInformation(email, firstName, lastName, "Manager");
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(employee);
                     Intent i = new Intent(EmployeeRegistration.this, LoginActivity.class);
                     startActivity(i);
@@ -84,7 +94,7 @@ public class EmployeeRegistration extends AppCompatActivity {
         final String email = emailTV.getText().toString();
         final String password = confirmPasswordTV.getText().toString();
 
-        if (allConditionsMet() == true) {
+        if (allConditionsMet()) {
             mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, onCompleteListener);
         }
     }
@@ -194,14 +204,17 @@ public class EmployeeRegistration extends AppCompatActivity {
         }
     }
 
-    public boolean validateCode() {
+    public String validateCode() {
         String code = registrationCodeTV.getText().toString();
-        if(code.equals(empPW) || code.equals(manPW)){
+        if(code.equals(empPW)){
             registrationCodeTV.setError(null);
-            return true;
+            return "emp";
+        }else if(code.equals(manPW)){
+            registrationCodeTV.setError(null);
+            return "man";
         }else{
             registrationCodeTV.setError("Incorrect Registration Code");
-            return false;
+            return "";
         }
     }
 
@@ -219,8 +232,9 @@ public class EmployeeRegistration extends AppCompatActivity {
         validatePassword();
         validateCode();
 
-        if (validateFirstName() == true && validateLastName() == true
-                && validateEmail() == true && validatePassword() == true && validateCode() == true) {
+        if (validateFirstName() && validateLastName()
+                && validateEmail()  && validatePassword()  &&
+                (validateCode().equals("emp") || validateCode().equals("man"))) {
             return true;
         } else {
             return false;
