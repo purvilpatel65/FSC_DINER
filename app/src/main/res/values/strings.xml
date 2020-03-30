@@ -73,4 +73,8 @@
 
     <string name="restaurant_1_name">Burger Studio</string>
 
+    <string name="radioBtn_multiple_select">Multiple Select</string>
+    <string name="radioBtn_single_select">Single Select</string>
+    <string name="radioBtn_no_select">No Select</string>
+
 </resources>

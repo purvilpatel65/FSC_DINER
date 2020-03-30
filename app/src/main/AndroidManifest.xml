@@ -2,31 +2,45 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fsc_diner">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.EmployeeRegistration"></activity>
-        <activity android:name=".controller.RestaurantFoodMenu" />
-        <activity android:name=".controller.UserRegistration" />
+        <activity android:name=".controller.FoodItemDetails" android:parentActivityName=".controller.RestaurantFoodMenu"></activity>
         <activity
-            android:name=".controller.SplashScreen"
-            android:screenOrientation="portrait">
+            android:name=".controller.AddIngredientsManagerSide"
+            android:parentActivityName=".controller.FoodMenuManagerSide" />
+        <activity
+            android:name=".controller.FoodMenuManagerSide"
+            android:parentActivityName=".controller.MainActivityManagerSide" />
+        <activity android:name=".controller.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".controller.LoginActivity" />
-        <activity android:name=".controller.MainActivity" />
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+        </activity>
+        <activity
+            android:name=".controller.RestaurantFoodMenu"
+            android:parentActivityName=".controller.MainActivity" />
+        <activity
+            android:name=".controller.LoginActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity android:name=".controller.MainActivity">
+        </activity>
+        <activity android:name=".controller.UserRegistration" />
+        <activity android:name=".controller.EmployeeRegistration" />
+        <activity android:name=".controller.MainActivityManagerSide">
+        </activity>
     </application>
 
 </manifest>

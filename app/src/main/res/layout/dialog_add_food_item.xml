@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="400dp"
+    android:layout_height="450dp"
+    android:id="@+id/add_food_item_dialog">
+
+    <TextView
+        android:id="@+id/addFoodItemLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Add Item"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="5dp"/>
+
+    <EditText
+        android:id="@+id/dialog_food_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Item Name"
+        android:layout_below="@+id/addFoodItemLabel"
+        android:layout_marginTop="50dp"
+        />
+
+    <EditText
+        android:id="@+id/dialog_food_item_price"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="Item Price ($)"
+        android:layout_below="@+id/dialog_food_item_name"
+        android:layout_marginTop="50dp"
+        android:inputType="numberDecimal"
+        />
+
+    <EditText
+        android:id="@+id/dialog_food_item_calories"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="Item Calories"
+        android:layout_below="@+id/dialog_food_item_name"
+        android:layout_toEndOf="@+id/dialog_food_item_price"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:inputType="number"
+        />
+
+    <Button
+        android:id="@+id/addFoodImageButtonDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Image"
+        android:layout_below="@+id/dialog_food_item_price"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/card_view_button_shape"/>
+
+    <TextView
+        android:id="@+id/foodImageNamePopUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/addFoodImageButtonDialog"
+        android:layout_below="@+id/dialog_food_item_price"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:text="No Image Selected"/>
+
+    <Button
+        android:id="@+id/foodItemSaveButtonDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Save"
+        android:background="@drawable/card_view_button_shape"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <Button
+        android:id="@+id/foodItemCancelButtonDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Cancel"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/card_view_button_shape"
+        android:layout_toEndOf="@+id/foodItemSaveButtonDialog"
+        android:layout_marginBottom="10dp"/>
+
+    <ProgressBar
+        android:id="@+id/foodItemAddProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+
+
+
+</RelativeLayout>

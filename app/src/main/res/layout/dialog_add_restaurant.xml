@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="400dp"
+    android:layout_height="350dp"
+    android:id="@+id/add_restaurant_dialog">
+
+    <TextView
+        android:id="@+id/addRestaurantLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Add Restaurant"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="5dp"/>
+
+    <EditText
+        android:id="@+id/dialog_restaurant_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Retaurant Name"
+        android:layout_below="@+id/addRestaurantLabel"
+        android:layout_marginTop="50dp"
+        />
+
+    <Button
+        android:id="@+id/addImageButtonDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Image"
+        android:layout_below="@+id/dialog_restaurant_name"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/card_view_button_shape"/>
+
+    <TextView
+        android:id="@+id/imageNamePopUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/addImageButtonDialog"
+        android:layout_below="@+id/dialog_restaurant_name"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="20dp"
+        android:text="No Image Selected"/>
+
+    <Button
+        android:id="@+id/saveButtonDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Save"
+        android:background="@drawable/card_view_button_shape"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <Button
+        android:id="@+id/cancelButtonDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Cancel"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/card_view_button_shape"
+        android:layout_toEndOf="@+id/saveButtonDialog"
+        android:layout_marginBottom="10dp"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+
+
+
+</RelativeLayout>

@@ -6,7 +6,15 @@ import android.view.View;
 
 import com.example.fsc_diner.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
@@ -16,12 +24,18 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
 
+    private DatabaseReference mDatabaseRef;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
+
+        checkUserType();
 
         BottomNavigationView navView = (BottomNavigationView) findViewById(R.id.nav_view);
 
@@ -34,15 +48,31 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupWithNavController(navView, navController);
 
+
+        if(getIntent().getBooleanExtra("IsComingFromCartButton", false)) navController.navigate(R.id.navigation_CheckOutBag);
+
+    }
+
+    private void checkUserType(){
+
+       mDatabaseRef.child(mAuth.getUid()).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+               String type = dataSnapshot.getValue(String.class);
+
+               if(type.equals("Manager")){
+                   Intent i = new Intent(getApplicationContext(), MainActivityManagerSide.class);
+                   startActivity(i);
+               }
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError databaseError) {
+
+           }
+       });
     }
 
 
-    public void onClickMenuCardViews(View view) {
-
-        String restaurantName = view.getTag().toString();
-
-        Intent intent = new Intent(getApplicationContext(), RestaurantFoodMenu.class);
-        intent.putExtra("RestaurantName", restaurantName);
-        startActivity(intent);
-    }
 }
