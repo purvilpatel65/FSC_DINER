@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/restaurant_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_columnWeight="1"
+        android:layout_rowWeight="1"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="8dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:tag="@string/restaurant_1_name"
+        android:layout_marginTop="2dp"
+        android:onClick="onClickMenuCardViews">
+
+        <ImageView
+            android:id="@+id/image_card_view"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/text_card_view"
+            android:text="@string/restaurant_1_name"
+            android:textAlignment="center"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:textColor="@android:color/white"
+            android:textSize="25dp"
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

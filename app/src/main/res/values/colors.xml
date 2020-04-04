@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name ="fsc_green">#2c9871</color>
+    <color name ="black_alpha_40">#66000000</color>
 </resources>

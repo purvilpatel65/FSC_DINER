@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="400dp"
+    android:layout_height="350dp"
+    android:id="@+id/add_ingredient_sub_item_dialog">
+
+    <TextView
+        android:id="@+id/addIngredientsubItemLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Add Ingredient Sub-Item"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="5dp"/>
+
+    <EditText
+        android:id="@+id/dialog_sub_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sub Item Name"
+        android:layout_below="@+id/addIngredientsubItemLabel"
+        android:layout_marginTop="50dp"
+        />
+
+    <CheckBox
+        android:id="@+id/has_extra_price_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Has Extra Price?"
+        android:layout_below="@+id/dialog_sub_item_name"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/extra_price_sub_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Extra Price"
+        android:layout_below="@+id/dialog_sub_item_name"
+        android:layout_toEndOf="@+id/has_extra_price_checkbox"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:inputType="numberDecimal"
+        android:visibility="invisible"
+        />
+
+    <CheckBox
+        android:id="@+id/is_pre_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Is Pre Selected?"
+        android:layout_below="@+id/has_extra_price_checkbox"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/subItemSaveButtonDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Save"
+        android:background="@drawable/card_view_button_shape"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <Button
+        android:id="@+id/subItemCancelButtonDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Cancel"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/card_view_button_shape"
+        android:layout_toEndOf="@+id/subItemSaveButtonDialog"
+        android:layout_marginBottom="10dp"/>
+
+    <ProgressBar
+        android:id="@+id/subItemProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
+
+
+
+</RelativeLayout>

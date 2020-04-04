@@ -31,8 +31,7 @@ public class UserRegistration extends AppCompatActivity {
                     "(?=.*[A-Z])" +         //1 lowercase letter maximum
                     "(?=.*[@#$%^&+=])" +    //1 special character minimum
                     "(?=\\S+$)" +           //no spaces allowed
-                    ".{7,}" +               //7 character minimum
-                    "$");
+                    ".{7,}" );              //7 character minimum
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,7 +175,7 @@ public class UserRegistration extends AppCompatActivity {
                     "\n- Have at least one lowercase letter" +
                     "\n- Have at least one number" +
                     "\n- Have at least one special character");
-            return false;
+            return false; //change this later on
         } else if (!password.equals(confirmedPassword)) {
             confirmPasswordTV.setError("Passwords do not match");
             return false;
