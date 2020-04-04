@@ -21,7 +21,6 @@
 
         <ImageView
             android:id="@+id/manager_food_item_image"
-            android:src="@drawable/burger_studio"
             android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

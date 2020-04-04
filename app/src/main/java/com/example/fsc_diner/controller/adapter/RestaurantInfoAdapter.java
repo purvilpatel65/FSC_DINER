@@ -42,9 +42,9 @@ public class RestaurantInfoAdapter extends RecyclerView.Adapter<RestaurantInfoAd
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            _restaurantName= (TextView) itemView.findViewById(R.id.text_card_view);
-            _restaurantImage= (ImageView) itemView.findViewById(R.id.image_card_view);
-            _cardView = (CardView)itemView.findViewById(R.id.restaurant_card_view);
+            _restaurantName= itemView.findViewById(R.id.text_card_view);
+            _restaurantImage= itemView.findViewById(R.id.image_card_view);
+            _cardView = itemView.findViewById(R.id.restaurant_card_view);
 
         }
     }
@@ -75,10 +75,10 @@ public class RestaurantInfoAdapter extends RecyclerView.Adapter<RestaurantInfoAd
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(_context, FoodMenuManagerSide.class);
+                Intent intent = new Intent(v.getContext(), FoodMenuManagerSide.class);
                 intent.putExtra("RestaurantName", tempName);
                 intent.putExtra("RestaurantKey", tempKey);
-                _context.startActivity(intent);
+                v.getContext().startActivity(intent);
             }
         });
 

@@ -24,6 +24,7 @@ import com.example.fsc_diner.model.FoodItemInfo;
 import com.squareup.picasso.Picasso;
 
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class FoodItemsAdapter extends RecyclerView.Adapter<FoodItemsAdapter.ViewHolder> {
@@ -54,13 +55,13 @@ public class FoodItemsAdapter extends RecyclerView.Adapter<FoodItemsAdapter.View
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            _foodImage = (ImageView) itemView.findViewById(R.id.food_pic);
-            _foodName = (TextView) itemView.findViewById(R.id.food_name);
-            _foodRating = (RatingBar) itemView.findViewById(R.id.food_rating);
-            _foodCalories = (TextView) itemView.findViewById(R.id.food_calorie);
-            _addBtn = (ImageButton) itemView.findViewById(R.id.add_button);
-            _priceBtn = (Button) itemView.findViewById(R.id.price_button);
-            _cardview = (CardView)itemView.findViewById(R.id.cv);
+            _foodImage = itemView.findViewById(R.id.food_pic);
+            _foodName = itemView.findViewById(R.id.food_name);
+            _foodRating = itemView.findViewById(R.id.food_rating);
+            _foodCalories = itemView.findViewById(R.id.food_calorie);
+            _addBtn = itemView.findViewById(R.id.add_button);
+            _priceBtn = itemView.findViewById(R.id.price_button);
+            _cardview = itemView.findViewById(R.id.cv);
 
         }
     }
@@ -70,7 +71,7 @@ public class FoodItemsAdapter extends RecyclerView.Adapter<FoodItemsAdapter.View
     public FoodItemsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_cardview_food_menu, parent, false);
-        ViewHolder vh = new ViewHolder((LinearLayout) v);
+        ViewHolder vh = new ViewHolder(v);
         return vh;
 
     }
@@ -81,7 +82,8 @@ public class FoodItemsAdapter extends RecyclerView.Adapter<FoodItemsAdapter.View
         final String tempName= _items.get(position).getItemName();
         final float tempRating= Float.valueOf(_items.get(position).getItemRating());
         final String tempCalories= Integer.toString(_items.get(position).getItemCalories());
-        final String tempPrice= Double.toString(_items.get(position).getItemPrice());
+        //final String tempPrice= Double.toString(_items.get(position).getItemPrice());
+        final String tempPrice= new DecimalFormat("0.00").format(_items.get(position).getItemPrice());
         final String tempkey= _items.get(position).getItemKey();
         final String tempResKey= _items.get(position).getRestaurantKey();
 
@@ -109,13 +111,13 @@ public class FoodItemsAdapter extends RecyclerView.Adapter<FoodItemsAdapter.View
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(_context, FoodItemDetails.class);
+                Intent i = new Intent(v.getContext(), FoodItemDetails.class);
                 i.putExtra("FoodItemName", tempName);
                 i.putExtra("FoodItemKey", tempkey);
                 i.putExtra("RestaurantKey", tempResKey);
                 i.putExtra("RestaurantName", _resName);
                 i.putExtra("ItemImage", _items.get(position).getItemImage());
-                _context.startActivity(i);
+                v.getContext().startActivity(i);
 
             }
         });

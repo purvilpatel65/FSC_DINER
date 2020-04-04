@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                if(type.equals("Manager")){
                    Intent i = new Intent(getApplicationContext(), MainActivityManagerSide.class);
                    startActivity(i);
+                   finish();
                }
            }
 

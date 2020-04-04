@@ -40,6 +40,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -92,31 +93,31 @@ public class FoodItemDetails extends AppCompatActivity {
 
         setToolbar();
 
-        expandingList = (ExpandingList) findViewById(R.id.item_details_expanding_list_main);
+        expandingList = findViewById(R.id.item_details_expanding_list_main);
 
-        itemImage = (ImageView)findViewById(R.id.item_details_image);
-        itemNameTextView = (TextView)findViewById(R.id.item_details_item_name);
-        itemPrice = (TextView)findViewById(R.id.item_details_item_price);
-        addToCartBtn = (Button)findViewById(R.id.item_details_add_to_cart_btn);
-        qntBtn = (Button)findViewById(R.id.item_details_quantity_btn);
-        addQntBtn = (ImageButton)findViewById(R.id.item_details_add_btn);
-        removeQntBtn = (ImageButton)findViewById(R.id.item_details_remove_btn);
+        itemImage = findViewById(R.id.item_details_image);
+        itemNameTextView = findViewById(R.id.item_details_item_name);
+        itemPrice = findViewById(R.id.item_details_item_price);
+        addToCartBtn = findViewById(R.id.item_details_add_to_cart_btn);
+        qntBtn = findViewById(R.id.item_details_quantity_btn);
+        addQntBtn = findViewById(R.id.item_details_add_btn);
+        removeQntBtn = findViewById(R.id.item_details_remove_btn);
 
         setUpDetails();
     }
 
     private void setToolbar(){
 
-        androidx.appcompat.widget.Toolbar myToolbar = (Toolbar) findViewById(R.id.item_details_toolbar);
+        androidx.appcompat.widget.Toolbar myToolbar = findViewById(R.id.item_details_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_back_pressed);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        TextView mTitle = (TextView) myToolbar.findViewById(R.id.item_details_toolbar_title);
+        TextView mTitle = myToolbar.findViewById(R.id.item_details_toolbar_title);
         mTitle.setText(itemName);
 
-        ((ImageButton)myToolbar.findViewById(R.id.item_details_toolbar_back_button)).setOnClickListener(new View.OnClickListener() {
+        (myToolbar.findViewById(R.id.item_details_toolbar_back_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -127,7 +128,7 @@ public class FoodItemDetails extends AppCompatActivity {
             }
         });
 
-        imgBadgeView = (ImageBadgeView)myToolbar.findViewById(R.id.item_details_badge_view);
+        imgBadgeView = myToolbar.findViewById(R.id.item_details_badge_view);
 
         imgBadgeView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +153,7 @@ public class FoodItemDetails extends AppCompatActivity {
                 FoodItemInfo tempInfo = dataSnapshot.getValue(FoodItemInfo.class);
 
                 itemNameTextView.setText(tempInfo.getItemName());
-                itemPrice.setText("$" + tempInfo.getItemPrice());
+                itemPrice.setText("$" + new DecimalFormat("0.00").format(tempInfo.getItemPrice()));
 
                 Picasso.get()
                         .load(tempInfo.getItemImage())
@@ -182,8 +183,8 @@ public class FoodItemDetails extends AppCompatActivity {
                     if(tempCategoryInfo.getIngredientCategorySelectionType().equals("Single Select")) {
 
                         View subItemView = tempItem.createSubItem();
-                        RadioGroup rg = ((RadioGroup)subItemView.findViewById(R.id.sub_item_radio_group));
-                        ((CheckBox)subItemView.findViewById(R.id.sub_item_check_box)).setVisibility(View.INVISIBLE);
+                        RadioGroup rg = (subItemView.findViewById(R.id.sub_item_radio_group));
+                        (subItemView.findViewById(R.id.sub_item_check_box)).setVisibility(View.INVISIBLE);
 
                         for(DataSnapshot subItemSnapshot: itemSnapshot.child("Options").getChildren()){
 
@@ -252,7 +253,7 @@ public class FoodItemDetails extends AppCompatActivity {
                               View subItemView = tempItem.createSubItem();
                             final IngredientSubItemInfo tempSubCategoryInfo = subItemSnapshot.getValue(IngredientSubItemInfo.class);
 
-                              ((RadioGroup)subItemView.findViewById(R.id.sub_item_radio_group)).setVisibility(View.INVISIBLE);
+                              (subItemView.findViewById(R.id.sub_item_radio_group)).setVisibility(View.INVISIBLE);
 
                               if(tempSubCategoryInfo.isHasExtraPrice()){
 
@@ -363,13 +364,13 @@ public class FoodItemDetails extends AppCompatActivity {
                 if(checkIfSingleSelect == true){
 
                     int tempRadioBtnId = ((RadioGroup)tempSubItemView.findViewById(R.id.sub_item_radio_group)).getCheckedRadioButtonId();
-                    RadioButton tempRadioBtn = (RadioButton)findViewById(tempRadioBtnId);
+                    RadioButton tempRadioBtn = findViewById(tempRadioBtnId);
 
                     selectedIngredientsName.add(tempRadioBtn.getText().toString());
                 }
                 else{
 
-                    CheckBox tempCheckBox = ((CheckBox) tempSubItemView.findViewById(R.id.sub_item_check_box));
+                    CheckBox tempCheckBox = (tempSubItemView.findViewById(R.id.sub_item_check_box));
 
                     if(tempCheckBox.isChecked() == true)
                         selectedIngredientsName.add(tempCheckBox.getText().toString());

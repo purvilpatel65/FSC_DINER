@@ -24,6 +24,7 @@ import com.example.fsc_diner.model.CartItem;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -53,16 +54,16 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            _cardView = (CardView) itemView.findViewById(R.id.cart_item_cardview);
-            _expandableView = (RelativeLayout)itemView.findViewById(R.id.expandable_relative_layout);
-            _title = (TextView)itemView.findViewById(R.id.cart_item_title_text);
-            _ingredientList = (TextView)itemView.findViewById(R.id.cart_item_ingredient_list);
-            _quantity = (TextView)itemView.findViewById(R.id.cart_item_qnt);
-            _remove = (TextView)itemView.findViewById(R.id.cart_item_remove_text);
-            _dropButton = (ImageButton)itemView.findViewById(R.id.cart_item_expandable_arraow);
-            _upButton = (ImageButton)itemView.findViewById(R.id.cart_item_expandable_arrow_up);
-            _priceButton = (Button)itemView.findViewById(R.id.cart_item_price_button);
-            _imageView = (CircularImageView)itemView.findViewById(R.id.cart_item_food_pic);
+            _cardView = itemView.findViewById(R.id.cart_item_cardview);
+            _expandableView = itemView.findViewById(R.id.expandable_relative_layout);
+            _title = itemView.findViewById(R.id.cart_item_title_text);
+            _ingredientList = itemView.findViewById(R.id.cart_item_ingredient_list);
+            _quantity = itemView.findViewById(R.id.cart_item_qnt);
+            _remove = itemView.findViewById(R.id.cart_item_remove_text);
+            _dropButton = itemView.findViewById(R.id.cart_item_expandable_arraow);
+            _upButton = itemView.findViewById(R.id.cart_item_expandable_arrow_up);
+            _priceButton = itemView.findViewById(R.id.cart_item_price_button);
+            _imageView = itemView.findViewById(R.id.cart_item_food_pic);
 
         }
 
@@ -82,7 +83,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
 
         holder._title.setText(_items.get(position).getItemName());
         holder._quantity.setText(Integer.toString(_items.get(position).getQuantity()));
-        holder._priceButton.setText("$" + _items.get(position).getTotalPrice());
+        holder._priceButton.setText("$" + new DecimalFormat("0.00").format(_items.get(position).getTotalPrice()));
 
         Picasso.get()
                 .load(_items.get(position).getImage())

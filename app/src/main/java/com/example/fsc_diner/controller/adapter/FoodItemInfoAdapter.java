@@ -37,6 +37,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class FoodItemInfoAdapter extends RecyclerView.Adapter<FoodItemInfoAdapter.ViewHolder> {
@@ -63,11 +64,11 @@ public class FoodItemInfoAdapter extends RecyclerView.Adapter<FoodItemInfoAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            _itemName= (TextView) itemView.findViewById(R.id.manager_food_item_name);
-            _itemCalorie= (TextView) itemView.findViewById(R.id.manager_food_item_calorie);
-            _itemPrice= (TextView) itemView.findViewById(R.id.manager_food_item_price);
-            _itemImage= (ImageView) itemView.findViewById(R.id.manager_food_item_image);
-            _cardView = (CardView)itemView.findViewById(R.id.manager_food_item_card_view);
+            _itemName= itemView.findViewById(R.id.manager_food_item_name);
+            _itemCalorie= itemView.findViewById(R.id.manager_food_item_calorie);
+            _itemPrice= itemView.findViewById(R.id.manager_food_item_price);
+            _itemImage= itemView.findViewById(R.id.manager_food_item_image);
+            _cardView = itemView.findViewById(R.id.manager_food_item_card_view);
 
         }
 
@@ -78,7 +79,7 @@ public class FoodItemInfoAdapter extends RecyclerView.Adapter<FoodItemInfoAdapte
     public FoodItemInfoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_card_view_food_item_manager_side, parent, false);
-        ViewHolder vh = new ViewHolder((LinearLayout) v);
+        ViewHolder vh = new ViewHolder(v);
         return vh;
 
     }
@@ -91,7 +92,7 @@ public class FoodItemInfoAdapter extends RecyclerView.Adapter<FoodItemInfoAdapte
         final String tempResKey = _items.get(position).getRestaurantKey();
 
         holder._itemName.setText(tempName);
-        holder._itemPrice.setText("$" + _items.get(position).getItemPrice());
+        holder._itemPrice.setText("$" + new DecimalFormat("0.00").format(_items.get(position).getItemPrice()));
         holder._itemCalorie.setText(Integer.toString(_items.get(position).getItemCalories()));
 
 
@@ -104,12 +105,12 @@ public class FoodItemInfoAdapter extends RecyclerView.Adapter<FoodItemInfoAdapte
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(_context, AddIngredientsManagerSide.class);
+                Intent intent = new Intent(v.getContext(), AddIngredientsManagerSide.class);
                 intent.putExtra("ItemName", tempName);
                 intent.putExtra("ItemKey", tempKey);
                 intent.putExtra("RestaurantName", _restaurantName);
                 intent.putExtra("RestaurantKey", tempResKey);
-                _context.startActivity(intent);
+                v.getContext().startActivity(intent);
             }
         });
 
