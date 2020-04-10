@@ -43,13 +43,13 @@ public class FoodItemsAdapter extends RecyclerView.Adapter<FoodItemsAdapter.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ImageView _foodImage;
-        public TextView _foodName;
-        public RatingBar _foodRating;
-        public TextView _foodCalories;
-        public ImageButton _addBtn;
-        public Button _priceBtn;
-        public CardView _cardview;
+        private ImageView _foodImage;
+        private TextView _foodName;
+        private RatingBar _foodRating;
+        private TextView _foodCalories;
+        private ImageButton _addBtn;
+        private Button _priceBtn;
+        private CardView _cardview;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -95,15 +95,13 @@ public class FoodItemsAdapter extends RecyclerView.Adapter<FoodItemsAdapter.View
 
 
         Picasso.get()
-                .load(_items.get(position).getItemImage())
+                .load(_items.get(position).getItemImage()).fit().centerCrop()
                 .into(holder._foodImage);
 
 
         holder._addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-               //do something
             }
         });
 

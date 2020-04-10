@@ -15,8 +15,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,16 +28,14 @@ import com.example.fsc_diner.model.IngredientCategoryInfo;
 import com.example.fsc_diner.model.IngredientSubItemInfo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,11 +47,7 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
     private String restaurantKey;
     private Dialog addItemCategoryDialog;
     private Dialog addSubItemDialog;
-
-    private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-    private FirebaseAuth mAuth;
-
     private ExpandingList expandingList;
     private List<ExpandingItem> expandingItems = new ArrayList<>();
 
@@ -72,21 +64,16 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
         addItemCategoryDialog = new Dialog(this);
         addSubItemDialog = new Dialog(this);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("Images");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Restaurant")
                                                      .child(restaurantKey)
                                                      .child("Menu")
                                                      .child(foodItemKey)
                                                      .child("Ingredients");
 
-
-        expandingList = (ExpandingList) findViewById(R.id.expanding_list_main);
-
+        expandingList = findViewById(R.id.expanding_list_main);
 
         addIngredientCategoryList();
         addIngredientSubItemList();
-
-
     }
 
     private void addIngredientCategoryList(){
@@ -111,23 +98,22 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
                     }
                 });
 
-                ((ImageView)tempItem.findViewById(R.id.add_more_sub_items)).setOnClickListener(new View.OnClickListener() {
+                (tempItem.findViewById(R.id.add_more_sub_items)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                          onAddSubItemClick(tempItem, dataSnapshot.getKey());
                         //Toast.makeText(getApplicationContext(), "ID: " + expandingList.getItemByIndex(), Toast.LENGTH_LONG).show();
                     }
                 });
 
-                ((ImageView)tempItem.findViewById(R.id.edit_item)).setOnClickListener(new View.OnClickListener() {
+                (tempItem.findViewById(R.id.edit_item)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         onIngredientCategoryEdit(tempItem, ((TextView)tempItem.findViewById(R.id.title)).getText().toString(),((TextView)tempItem.findViewById(R.id.select_type)).getText().toString(), dataSnapshot.getKey());
                     }
                 });
 
-                ((ImageView)tempItem.findViewById(R.id.remove_item)).setOnClickListener(new View.OnClickListener() {
+                (tempItem.findViewById(R.id.remove_item)).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         onIngredientCategoryDelete(tempItem, dataSnapshot.getKey());
@@ -139,22 +125,18 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
             }
 
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
             }
         });
     }
@@ -180,16 +162,12 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
 
                         IngredientSubItemInfo info = subItemSnapshot.getValue(IngredientSubItemInfo.class);
 
-                       configureSubItem(newSubItem, info.isPreSelected(), info.isHasExtraPrice(), info.getIngredientSubItemName(), Double.toString(info.getExtraPrice()), currentItem, postSnapshot.getKey());
-
+                       configureSubItem(newSubItem, info.isPreSelected(), info.isHasExtraPrice(), info.getIngredientSubItemName(), new DecimalFormat("0.00").format(info.getExtraPrice()), currentItem, postSnapshot.getKey());
                     }
 
                     currentItem.collapse();
                     tempCount++;
-
                 }
-
-
             }
 
             @Override
@@ -197,10 +175,7 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
 
             }
         });
-
-
     }
-
 
     private void setToolbar(){
         androidx.appcompat.widget.Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar_food_ingredients);
@@ -211,7 +186,7 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
         TextView mTitle = (TextView) myToolbar.findViewById(R.id.toolbar_title_food_ingredients);
         mTitle.setText( foodItemName + " Ingredients");
 
-        ((ImageButton)myToolbar.findViewById(R.id.food_ingredients_toolbar_back_button)).setOnClickListener(new View.OnClickListener() {
+        (myToolbar.findViewById(R.id.food_ingredients_toolbar_back_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -227,11 +202,11 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
 
         addItemCategoryDialog.setContentView(R.layout.dialog_add_ingredients_category);
 
-        Button cancel = (Button)addItemCategoryDialog.findViewById(R.id.cancelIngredientCategoryButtonDialog);
-        Button save = (Button)addItemCategoryDialog.findViewById(R.id.saveIngredientCategoryButtonDialog);
-        final EditText ingredientCategoryName = (EditText)addItemCategoryDialog.findViewById(R.id.dialog_ingredient_category_name);
-        final RadioGroup selectionTypeGroup = (RadioGroup)addItemCategoryDialog.findViewById(R.id.radioSelectType);
-        final ProgressBar pgb = (ProgressBar) addItemCategoryDialog.findViewById(R.id.ingredientCategoryProgressBar);
+        Button cancel = addItemCategoryDialog.findViewById(R.id.cancelIngredientCategoryButtonDialog);
+        Button save = addItemCategoryDialog.findViewById(R.id.saveIngredientCategoryButtonDialog);
+        final EditText ingredientCategoryName = addItemCategoryDialog.findViewById(R.id.dialog_ingredient_category_name);
+        final RadioGroup selectionTypeGroup = addItemCategoryDialog.findViewById(R.id.radioSelectType);
+        final ProgressBar pgb = addItemCategoryDialog.findViewById(R.id.ingredientCategoryProgressBar);
 
         pgb.setVisibility(View.INVISIBLE);
 
@@ -249,7 +224,7 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
                 pgb.setVisibility(View.VISIBLE);
 
                 int selectedId = selectionTypeGroup.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) addItemCategoryDialog.findViewById(selectedId);
+                RadioButton rb = addItemCategoryDialog.findViewById(selectedId);
 
                 IngredientCategoryInfo info = new IngredientCategoryInfo(ingredientCategoryName.getText().toString().trim(), rb.getText().toString());
 
@@ -281,18 +256,17 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
         });
 
         addItemCategoryDialog.show();
-
     }
 
     private void onIngredientCategoryEdit(final ExpandingItem item, final String _name, String _selectionType, final String ingredientCategoryKey) {
 
         addItemCategoryDialog.setContentView(R.layout.dialog_add_ingredients_category);
 
-        Button cancel = (Button)addItemCategoryDialog.findViewById(R.id.cancelIngredientCategoryButtonDialog);
-        Button save = (Button)addItemCategoryDialog.findViewById(R.id.saveIngredientCategoryButtonDialog);
-        final EditText ingredientCategoryName = (EditText)addItemCategoryDialog.findViewById(R.id.dialog_ingredient_category_name);
-        final RadioGroup selectionTypeGroup = (RadioGroup)addItemCategoryDialog.findViewById(R.id.radioSelectType);
-        final ProgressBar pgb = (ProgressBar) addItemCategoryDialog.findViewById(R.id.ingredientCategoryProgressBar);
+        Button cancel = addItemCategoryDialog.findViewById(R.id.cancelIngredientCategoryButtonDialog);
+        Button save = addItemCategoryDialog.findViewById(R.id.saveIngredientCategoryButtonDialog);
+        final EditText ingredientCategoryName = addItemCategoryDialog.findViewById(R.id.dialog_ingredient_category_name);
+        final RadioGroup selectionTypeGroup = addItemCategoryDialog.findViewById(R.id.radioSelectType);
+        final ProgressBar pgb = addItemCategoryDialog.findViewById(R.id.ingredientCategoryProgressBar);
 
         pgb.setVisibility(View.INVISIBLE);
 
@@ -316,8 +290,7 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
                 pgb.setVisibility(View.VISIBLE);
 
                 int selectedId = selectionTypeGroup.getCheckedRadioButtonId();
-                RadioButton rb = (RadioButton) addItemCategoryDialog.findViewById(selectedId);
-
+                RadioButton rb = addItemCategoryDialog.findViewById(selectedId);
 
                 mDatabaseRef.child(ingredientCategoryKey).child("ingredientCategoryName").setValue(ingredientCategoryName.getText().toString().trim());
                 mDatabaseRef.child(ingredientCategoryKey).child("ingredientCategorySelectionType").setValue(rb.getText().toString());
@@ -331,13 +304,10 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
                 pgb.setVisibility(View.INVISIBLE);
 
                 Toast.makeText(getApplicationContext(), "Successfuly changed", Toast.LENGTH_LONG).show();
-
-
             }
         });
 
         addItemCategoryDialog.show();
-
     }
 
     private void onIngredientCategoryDelete(final ExpandingItem item, final String ingredientCategoryKey){
@@ -384,18 +354,17 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
         alert11.show();
     }
 
-
     private void onAddSubItemClick(final ExpandingItem item, final String ingredientCategoryKey){
 
         addSubItemDialog.setContentView(R.layout.dialog_add_ingredient_sub_item);
 
-        Button cancel = (Button)addSubItemDialog.findViewById(R.id.subItemCancelButtonDialog);
-        Button save = (Button)addSubItemDialog.findViewById(R.id.subItemSaveButtonDialog);
-        final ProgressBar pgb = (ProgressBar) addSubItemDialog.findViewById(R.id.subItemProgressBar);
-        final EditText subItemName = (EditText)addSubItemDialog.findViewById(R.id.dialog_sub_item_name);
-        final EditText extraPrice = (EditText)addSubItemDialog.findViewById(R.id.extra_price_sub_item);
-        final CheckBox hasExtraPrice = (CheckBox)addSubItemDialog.findViewById(R.id.has_extra_price_checkbox);
-        final CheckBox isPreSelected = (CheckBox)addSubItemDialog.findViewById(R.id.is_pre_selected);
+        Button cancel = addSubItemDialog.findViewById(R.id.subItemCancelButtonDialog);
+        Button save = addSubItemDialog.findViewById(R.id.subItemSaveButtonDialog);
+        final ProgressBar pgb = addSubItemDialog.findViewById(R.id.subItemProgressBar);
+        final EditText subItemName = addSubItemDialog.findViewById(R.id.dialog_sub_item_name);
+        final EditText extraPrice = addSubItemDialog.findViewById(R.id.extra_price_sub_item);
+        final CheckBox hasExtraPrice = addSubItemDialog.findViewById(R.id.has_extra_price_checkbox);
+        final CheckBox isPreSelected = addSubItemDialog.findViewById(R.id.is_pre_selected);
 
         final String tempIngredientCategoryName = ((TextView)((ExpandingItem)item).findViewById(R.id.title)).getText().toString();
 
@@ -470,26 +439,23 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
         addSubItemDialog.show();
     }
 
-
-
-
     private void configureSubItem(final View subItemView, final boolean isPreselected, final boolean hasExtraPrice, final String name, final String extraPrice, final ExpandingItem item, final String ingredientCategoryKey){
 
         String selectedType = "";
-        ((TextView) subItemView.findViewById(R.id.extra_price_textview)).setVisibility(View.INVISIBLE);
-        ((TextView) subItemView.findViewById(R.id.selected_type_textview)).setVisibility(View.INVISIBLE);
+        (subItemView.findViewById(R.id.extra_price_textview)).setVisibility(View.INVISIBLE);
+        (subItemView.findViewById(R.id.selected_type_textview)).setVisibility(View.INVISIBLE);
 
         if(isPreselected == true) {
-            ((TextView) subItemView.findViewById(R.id.selected_type_textview)).setVisibility(View.VISIBLE);
+            (subItemView.findViewById(R.id.selected_type_textview)).setVisibility(View.VISIBLE);
             selectedType = "Pre-selected";
         }
-        if(hasExtraPrice == true)((TextView) subItemView.findViewById(R.id.extra_price_textview)).setVisibility(View.VISIBLE);
+        if(hasExtraPrice == true)(subItemView.findViewById(R.id.extra_price_textview)).setVisibility(View.VISIBLE);
 
         ((TextView) subItemView.findViewById(R.id.sub_title)).setText(name);
         ((TextView) subItemView.findViewById(R.id.extra_price_textview)).setText("($" + extraPrice + ")");
         ((TextView) subItemView.findViewById(R.id.selected_type_textview)).setText(selectedType);
 
-        ((ImageView) subItemView.findViewById(R.id.edit_sub_items)).setOnClickListener(new View.OnClickListener() {
+        (subItemView.findViewById(R.id.edit_sub_items)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -497,7 +463,7 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
             }
         });
 
-        ((ImageView) subItemView.findViewById(R.id.remove_sub_item)).setOnClickListener(new View.OnClickListener() {
+        (subItemView.findViewById(R.id.remove_sub_item)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onRemoveSubItemClick(item, subItemView, ingredientCategoryKey);
@@ -511,13 +477,13 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
 
         addSubItemDialog.setContentView(R.layout.dialog_add_ingredient_sub_item);
 
-        Button cancel = (Button)addSubItemDialog.findViewById(R.id.subItemCancelButtonDialog);
-        Button save = (Button)addSubItemDialog.findViewById(R.id.subItemSaveButtonDialog);
-        final ProgressBar pgb = (ProgressBar) addSubItemDialog.findViewById(R.id.subItemProgressBar);
-        final EditText subItemName = (EditText)addSubItemDialog.findViewById(R.id.dialog_sub_item_name);
-        final EditText extraPrice = (EditText)addSubItemDialog.findViewById(R.id.extra_price_sub_item);
-        final CheckBox hasExtraPrice = (CheckBox)addSubItemDialog.findViewById(R.id.has_extra_price_checkbox);
-        final CheckBox isPreSelected = (CheckBox)addSubItemDialog.findViewById(R.id.is_pre_selected);
+        Button cancel = addSubItemDialog.findViewById(R.id.subItemCancelButtonDialog);
+        Button save = addSubItemDialog.findViewById(R.id.subItemSaveButtonDialog);
+        final ProgressBar pgb = addSubItemDialog.findViewById(R.id.subItemProgressBar);
+        final EditText subItemName = addSubItemDialog.findViewById(R.id.dialog_sub_item_name);
+        final EditText extraPrice = addSubItemDialog.findViewById(R.id.extra_price_sub_item);
+        final CheckBox hasExtraPrice = addSubItemDialog.findViewById(R.id.has_extra_price_checkbox);
+        final CheckBox isPreSelected = addSubItemDialog.findViewById(R.id.is_pre_selected);
 
         final String tempIngredientCategoryName = ((TextView)((ExpandingItem)item).findViewById(R.id.title)).getText().toString();
 
@@ -534,7 +500,7 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if(isChecked == true) extraPrice.setVisibility(View.VISIBLE);
+                if(isChecked) extraPrice.setVisibility(View.VISIBLE);
                 else extraPrice.setVisibility(View.INVISIBLE);
             }
         });
@@ -662,10 +628,5 @@ public class AddIngredientsManagerSide extends AppCompatActivity {
 
         AlertDialog alert11 = builder.create();
         alert11.show();
-
     }
-
-
 }
-
-
