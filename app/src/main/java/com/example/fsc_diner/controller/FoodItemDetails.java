@@ -1,25 +1,18 @@
 package com.example.fsc_diner.controller;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.diegodobelo.expandingview.ExpandingItem;
 import com.diegodobelo.expandingview.ExpandingList;
 import com.example.fsc_diner.R;
@@ -27,7 +20,6 @@ import com.example.fsc_diner.model.CartItem;
 import com.example.fsc_diner.model.FoodItemInfo;
 import com.example.fsc_diner.model.IngredientCategoryInfo;
 import com.example.fsc_diner.model.IngredientSubItemInfo;
-import com.example.fsc_diner.ui.checkout.CheckOutFragment;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,17 +28,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
+
 
 import ru.nikartm.support.ImageBadgeView;
 
@@ -58,22 +45,17 @@ public class FoodItemDetails extends AppCompatActivity {
     private String resName;
     private String imageUrl;
 
-    private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-    private FirebaseAuth mAuth;
     private String uid;
 
     private ImageView itemImage;
     private TextView itemNameTextView;
     private TextView itemPrice;
-    private Button addToCartBtn;
-    private ImageButton removeQntBtn;
-    private ImageButton addQntBtn;
     private Button qntBtn;
     private ImageBadgeView imgBadgeView;
 
     private ExpandingList expandingList;
-    private double _tempExtraPrice = 0.0;
+    private double _tempExtraPrice = 0.00;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,10 +68,8 @@ public class FoodItemDetails extends AppCompatActivity {
         resName = getIntent().getStringExtra("RestaurantName");
         imageUrl = getIntent().getStringExtra("ItemImage");
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("Images");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Restaurant").child(resKey).child("Menu").child(itemKey);
-        mAuth = FirebaseAuth.getInstance();
-        uid = mAuth.getUid();
+        uid = FirebaseAuth.getInstance().getUid();
 
         setToolbar();
 
@@ -98,10 +78,7 @@ public class FoodItemDetails extends AppCompatActivity {
         itemImage = findViewById(R.id.item_details_image);
         itemNameTextView = findViewById(R.id.item_details_item_name);
         itemPrice = findViewById(R.id.item_details_item_price);
-        addToCartBtn = findViewById(R.id.item_details_add_to_cart_btn);
         qntBtn = findViewById(R.id.item_details_quantity_btn);
-        addQntBtn = findViewById(R.id.item_details_add_btn);
-        removeQntBtn = findViewById(R.id.item_details_remove_btn);
 
         setUpDetails();
     }
@@ -133,7 +110,6 @@ public class FoodItemDetails extends AppCompatActivity {
         imgBadgeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 i.putExtra("IsComingFromCartButton", true);
                 startActivity(i);
@@ -141,7 +117,6 @@ public class FoodItemDetails extends AppCompatActivity {
         });
 
         updateBadgeCartItem();
-
     }
 
     private void setUpDetails(){
@@ -172,9 +147,8 @@ public class FoodItemDetails extends AppCompatActivity {
                         @Override
                         public void itemCollapseStateChanged(boolean expanded) {
 
-                            if(expanded == true) tempItem.setIndicatorIconRes(R.drawable.ic_keyboard_arrow_down);
+                            if(expanded) tempItem.setIndicatorIconRes(R.drawable.ic_keyboard_arrow_down);
                             else tempItem.setIndicatorIconRes(R.drawable.ic_keyboard_arrow_up);
-
                         }
                     });
 
@@ -192,14 +166,9 @@ public class FoodItemDetails extends AppCompatActivity {
 
                             RadioButton radioBtn = new RadioButton(getApplicationContext());
 
-                            if(tempSubCategoryInfo.isHasExtraPrice())
-                            {
-                                radioBtn.setText(tempSubCategoryInfo.getIngredientSubItemName() + " ( $" + tempSubCategoryInfo.getExtraPrice() + ")");
-
-
-                            }
-                            else{
-
+                            if(tempSubCategoryInfo.isHasExtraPrice()) {
+                                radioBtn.setText(tempSubCategoryInfo.getIngredientSubItemName() + " ( $" + new DecimalFormat("0.00").format(tempSubCategoryInfo.getExtraPrice()) + ")");
+                            } else{
                                 radioBtn.setText(tempSubCategoryInfo.getIngredientSubItemName());
                             }
 
@@ -208,45 +177,34 @@ public class FoodItemDetails extends AppCompatActivity {
                             radioBtn.setId(View.generateViewId());
 
                             rg.addView(radioBtn);
-
                         }
-
 
                         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                             @Override
                             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-                                RadioButton tempBtn = (RadioButton)group.findViewById(checkedId);
+                                RadioButton tempBtn = group.findViewById(checkedId);
                                 String tempBtnText = tempBtn.getText().toString();
                                 int index = tempBtnText.indexOf("$");
 
-
-                                if(index != -1 && tempBtn.isChecked() == true){
-
+                                if(index != -1 && tempBtn.isChecked()){
                                     double tempItemPrice = Double.parseDouble(tempBtnText.substring(index+1, tempBtnText.length()-1));
 
                                     int tempQnt = Integer.parseInt(qntBtn.getText().toString());
                                     double tempPrice = Double.parseDouble(itemPrice.getText().toString().substring(1));
                                     _tempExtraPrice = tempItemPrice*tempQnt;
 
-                                    itemPrice.setText("$" + (tempPrice + (tempItemPrice*tempQnt)));
+                                    itemPrice.setText("$" + (new DecimalFormat("0.00").format(tempPrice + (tempItemPrice*tempQnt))));
                                 }
 
-
-
-                                if(index == -1 && tempBtn.isChecked() == true){
-
-                                    int tempQnt = Integer.parseInt(qntBtn.getText().toString());
+                                if(index == -1 && tempBtn.isChecked()){
                                     double tempPrice = Double.parseDouble(itemPrice.getText().toString().substring(1));
 
-                                    itemPrice.setText("$" + (tempPrice - _tempExtraPrice));
+                                    itemPrice.setText("$" + (new DecimalFormat("0.00").format(tempPrice - _tempExtraPrice)));
                                 }
-
                             }
                         });
-
-                    }
-                    else{
+                    } else{
 
                         for(DataSnapshot subItemSnapshot: itemSnapshot.child("Options").getChildren()){
 
@@ -257,18 +215,19 @@ public class FoodItemDetails extends AppCompatActivity {
 
                               if(tempSubCategoryInfo.isHasExtraPrice()){
 
-                                  ((CheckBox) subItemView.findViewById(R.id.sub_item_check_box)).setText(tempSubCategoryInfo.getIngredientSubItemName() + " ( $" + tempSubCategoryInfo.getExtraPrice() + ")");
+                                  ((CheckBox) subItemView.findViewById(R.id.sub_item_check_box)).setText(tempSubCategoryInfo.getIngredientSubItemName() + " ( $" + new DecimalFormat("0.00").format(tempSubCategoryInfo.getExtraPrice()) + ")");
 
                                   ((CheckBox) subItemView.findViewById(R.id.sub_item_check_box)).setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                                       @Override
                                       public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                                          if(isChecked == true){
+                                          if(isChecked){
 
                                               int tempQnt = Integer.parseInt(qntBtn.getText().toString());
+
                                               double tempPrice = Double.parseDouble(itemPrice.getText().toString().substring(1));
 
-                                              itemPrice.setText("$" + (tempPrice + (tempSubCategoryInfo.getExtraPrice()*tempQnt)));
+                                              itemPrice.setText("$" + (new DecimalFormat("0.00").format(tempPrice + (tempSubCategoryInfo.getExtraPrice()*tempQnt))));
                                           }
 
                                           if(isChecked == false){
@@ -276,7 +235,7 @@ public class FoodItemDetails extends AppCompatActivity {
                                               int tempQnt = Integer.parseInt(qntBtn.getText().toString());
                                               double tempPrice = Double.parseDouble(itemPrice.getText().toString().substring(1));
 
-                                              itemPrice.setText("$" + (tempPrice - (tempSubCategoryInfo.getExtraPrice()*tempQnt)));
+                                              itemPrice.setText("$" + (new DecimalFormat("0.00").format(tempPrice - (tempSubCategoryInfo.getExtraPrice()*tempQnt))));
                                           }
                                       }
                                   });
@@ -288,12 +247,8 @@ public class FoodItemDetails extends AppCompatActivity {
                               if(tempSubCategoryInfo.isPreSelected()) ((CheckBox)subItemView.findViewById(R.id.sub_item_check_box)).setChecked(true);
                         }
                     }
-
-
                     tempItem.collapse();
                 }
-
-
             }
 
             @Override
@@ -311,10 +266,8 @@ public class FoodItemDetails extends AppCompatActivity {
         if(tempQnt > 1){
 
             qntBtn.setText(Integer.toString(tempQnt - 1));
-            itemPrice.setText("$" + Double.toString(tempPrice - (tempPrice/tempQnt)));
-
+            itemPrice.setText("$" + new DecimalFormat("0.00").format(tempPrice - (tempPrice/tempQnt)));
         }
-
     }
 
     public void onQntAddPressed(View view) {
@@ -323,8 +276,7 @@ public class FoodItemDetails extends AppCompatActivity {
         double tempPrice = Double.parseDouble(itemPrice.getText().toString().substring(1));
 
         qntBtn.setText(Integer.toString(tempQnt + 1));
-        itemPrice.setText("$" + Double.toString(tempPrice + (tempPrice/tempQnt)));
-
+        itemPrice.setText("$" + new DecimalFormat("0.00").format(tempPrice + (tempPrice/tempQnt)));
     }
 
     public void onAddToCartPressed(View view) {
@@ -358,10 +310,10 @@ public class FoodItemDetails extends AppCompatActivity {
 
                 boolean checkIfSingleSelect = false;
 
-                if(((RadioGroup)tempSubItemView.findViewById(R.id.sub_item_radio_group)).getVisibility() == View.VISIBLE)
+                if((tempSubItemView.findViewById(R.id.sub_item_radio_group)).getVisibility() == View.VISIBLE)
                     checkIfSingleSelect = true;
 
-                if(checkIfSingleSelect == true){
+                if(checkIfSingleSelect){
 
                     int tempRadioBtnId = ((RadioGroup)tempSubItemView.findViewById(R.id.sub_item_radio_group)).getCheckedRadioButtonId();
                     RadioButton tempRadioBtn = findViewById(tempRadioBtnId);
@@ -372,7 +324,7 @@ public class FoodItemDetails extends AppCompatActivity {
 
                     CheckBox tempCheckBox = (tempSubItemView.findViewById(R.id.sub_item_check_box));
 
-                    if(tempCheckBox.isChecked() == true)
+                    if(tempCheckBox.isChecked())
                         selectedIngredientsName.add(tempCheckBox.getText().toString());
                 }
             }
@@ -400,10 +352,9 @@ public class FoodItemDetails extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
 
-                        Toast.makeText(getApplicationContext(), "Adding to cart unsuccessfull. Please try again!\n" + e.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Adding to cart unsuccessful. Please try again!\n" + e.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
-
     }
 
     private void updateBadgeCartItem(){
@@ -420,6 +371,4 @@ public class FoodItemDetails extends AppCompatActivity {
             }
         });
     }
-
-
 }

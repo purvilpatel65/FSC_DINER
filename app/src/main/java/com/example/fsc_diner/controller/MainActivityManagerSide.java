@@ -150,12 +150,12 @@ public class MainActivityManagerSide extends AppCompatActivity {
     public void onRestaurantAdd(View view) {
         addRestaurantDialog.setContentView(R.layout.dialog_add_restaurant);
 
-        Button cancel = (Button)addRestaurantDialog.findViewById(R.id.cancelButtonDialog);
-        Button save = (Button)addRestaurantDialog.findViewById(R.id.saveButtonDialog);
-        Button addImg = (Button)addRestaurantDialog.findViewById(R.id.addImageButtonDialog);
-        imgText = (TextView) addRestaurantDialog.findViewById(R.id.imageNamePopUp);
-        final EditText restaurantName = (EditText)addRestaurantDialog.findViewById(R.id.dialog_restaurant_name);
-        final ProgressBar pgb = (ProgressBar) addRestaurantDialog.findViewById(R.id.progressBar);
+        Button cancel = addRestaurantDialog.findViewById(R.id.cancelButtonDialog);
+        Button save = addRestaurantDialog.findViewById(R.id.saveButtonDialog);
+        Button addImg = addRestaurantDialog.findViewById(R.id.addImageButtonDialog);
+        imgText = addRestaurantDialog.findViewById(R.id.imageNamePopUp);
+        final EditText restaurantName = addRestaurantDialog.findViewById(R.id.dialog_restaurant_name);
+        final ProgressBar pgb = addRestaurantDialog.findViewById(R.id.progressBar);
 
         pgb.setVisibility(View.INVISIBLE);
 

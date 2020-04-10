@@ -1,9 +1,14 @@
 package com.example.fsc_diner.ui.menu;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +30,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +47,7 @@ public class MenuFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<RestaurantInfo> resInfo = new ArrayList<>();
+    private RelativeLayout relativeLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,11 +55,12 @@ public class MenuFragment extends Fragment {
                 ViewModelProviders.of(this).get(MenuViewModel.class);
         View root = inflater.inflate(R.layout.fragment_menu, container, false);
        // final TextView textView = root.findViewById(R.id.text_home);
+        relativeLayout = root.findViewById(R.id.menu_relative);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Restaurant");
 
-        mRecyclerView = (RecyclerView) root.findViewById(R.id.recyclerview_restaurant_customer_side);
+        mRecyclerView = root.findViewById(R.id.recyclerview_restaurant_customer_side);
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new GridLayoutManager(getContext(), 2);
@@ -62,6 +71,21 @@ public class MenuFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
         addRestaurantList();
+
+
+        final ImageView img = new ImageView(getContext());
+        Picasso.get().load("https://firebasestorage.googleapis.com/v0/b/fsc-diner.appspot.com/o/Images%2Ffood_background.jpg?alt=media&token=9eb41c03-8106-485c-8e96-a2de5e5c3d68").into(img, new com.squareup.picasso.Callback() {
+            @Override
+            public void onSuccess() {
+                relativeLayout.setBackgroundDrawable(img.getDrawable());
+            }
+
+            @Override
+            public void onError(Exception e) {
+
+            }
+
+        });
 
         return root;
     }
