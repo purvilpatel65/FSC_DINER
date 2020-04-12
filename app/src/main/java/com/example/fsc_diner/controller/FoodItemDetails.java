@@ -337,6 +337,7 @@ public class FoodItemDetails extends AppCompatActivity {
         cartItem.setTotalPrice(Double.parseDouble(itemPrice.getText().toString().substring(1)));
         cartItem.setRestaurantName(resName);
         cartItem.setImage(imageUrl);
+        cartItem.setRestaurantKey(resKey);
 
         List<HashMap<String, List<String>>> ingredientsInfoList = new ArrayList<HashMap<String, List<String>>>();
         HashMap<String, List<String>> tempMap;

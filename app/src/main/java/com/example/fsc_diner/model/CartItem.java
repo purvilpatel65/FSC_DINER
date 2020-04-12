@@ -8,6 +8,7 @@ public class CartItem {
 
     private String itemName;
     private String restaurantName;
+    private String restaurantKey;
     private double totalPrice;
     private int quantity;
     private String cartItemKey;
@@ -16,9 +17,10 @@ public class CartItem {
 
     public  CartItem(){}
 
-    public CartItem(String itemName, String restaurantName, int quantity, String cartItemKey, String img, List<HashMap<String, List<String>>> ingredients) {
+    public CartItem(String itemName, String restaurantName, String resKey, int quantity, String cartItemKey, String img, List<HashMap<String, List<String>>> ingredients) {
         this.itemName = itemName;
         this.restaurantName = restaurantName;
+        this.restaurantKey = resKey;
         this.totalPrice = totalPrice;
         this.quantity = quantity;
         this.cartItemKey = cartItemKey;
@@ -80,5 +82,13 @@ public class CartItem {
 
     public void setIngredients(List<HashMap<String, List<String>>> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    public String getRestaurantKey() {
+        return restaurantKey;
+    }
+
+    public void setRestaurantKey(String restaurantKey) {
+        this.restaurantKey = restaurantKey;
     }
 }
