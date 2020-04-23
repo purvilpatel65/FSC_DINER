@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -20,6 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fsc_diner.R;
 import com.example.fsc_diner.controller.adapter.CartItemAdapter;
 import com.example.fsc_diner.model.CartItem;
+import com.example.fsc_diner.model.OrderItem;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +37,7 @@ import com.google.firebase.storage.StorageReference;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class CheckOutFragment extends Fragment {
 
@@ -43,6 +48,8 @@ public class CheckOutFragment extends Fragment {
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
     private String uid;
+    private String userEmail;
+    private String userName;
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -66,6 +73,7 @@ public class CheckOutFragment extends Fragment {
         uid = mAuth.getUid();
         mRecyclerView = root.findViewById(R.id.cart_item_recycler_view);
         clearCartButton = root.findViewById(R.id.clear_cart_button);
+        payNowButton = root.findViewById(R.id.payNowButton);
         subtotalTV = root.findViewById(R.id.subtotalTV);
         mRecyclerView.setHasFixedSize(true);
 
@@ -76,6 +84,7 @@ public class CheckOutFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
         addCartItemList();
+        setUserEmail();
 
 
         clearCartButton.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +94,13 @@ public class CheckOutFragment extends Fragment {
                 firebaseDatabase.getReference("Users").child(FirebaseAuth.getInstance().getUid()).child("Cart").removeValue();
                 mAdapter.notifyDataSetChanged();
                 cartItem.clear();
+            }
+        });
+
+        payNowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onCheckButtonClick();
             }
         });
 
@@ -138,6 +154,79 @@ public class CheckOutFragment extends Fragment {
             @Override
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void onCheckButtonClick() {
+        Random rand = new Random();
+        final String orderId = String.format("%04d", rand.nextInt(10000));
+
+        int index = userEmail.indexOf("@");
+        String orderKey = orderId + "_" + userEmail.substring(0, index);
+
+        for (final CartItem item : cartItem) {
+
+            final String currentOrderKey = mDatabaseRef.child("CurrentOrders").push().getKey();
+
+            final OrderItem orderItem = new OrderItem(Integer.parseInt(orderId)
+                    , userName
+                    , userEmail
+                    , item.getItemName()
+                    , item.getRestaurantName()
+                    , item.getRestaurantKey()
+                    , item.getQuantity()
+                    , currentOrderKey
+                    , orderKey
+                    , 1
+                    , item.getIngredients());
+
+            FirebaseDatabase.getInstance().getReference("Restaurant").child(item.getRestaurantKey()).child("Orders").child(orderKey).child(currentOrderKey)
+                    .setValue(orderItem)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                            mDatabaseRef.child(uid).child("CurrentOrders").child(currentOrderKey).setValue(orderItem)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(getContext(), item.getItemName() + " has successfully ordered. Thanks!", Toast.LENGTH_SHORT).show();
+                                            cartItem.remove(item);
+                                            mAdapter.notifyDataSetChanged();
+
+                                            mDatabaseRef.child(uid).child("Cart").removeValue();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(getContext(), "Unexpected error has occured. Please talk to the restaurant associates for further assistance!\n" + e.toString(), Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(), "Unexpected error has occured. Please talk to the restaurant associates for further assistance!\n" + e.toString(), Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+        }
+    }
+    private void setUserEmail() {
+        mDatabaseRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userEmail = dataSnapshot.child("email").getValue(String.class);
+                userName = dataSnapshot.child("firstName").getValue(String.class) + " " + dataSnapshot.child("lastName").getValue(String.class);
             }
 
             @Override

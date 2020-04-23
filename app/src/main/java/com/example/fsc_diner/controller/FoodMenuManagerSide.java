@@ -152,14 +152,14 @@ public class FoodMenuManagerSide extends AppCompatActivity {
     public void onFoodItemAdd(View view) {
         addFoodItemDialog.setContentView(R.layout.dialog_add_food_item);
 
-        Button cancel = (Button)addFoodItemDialog.findViewById(R.id.foodItemCancelButtonDialog);
-        Button save = (Button)addFoodItemDialog.findViewById(R.id.foodItemSaveButtonDialog);
-        Button addImg = (Button)addFoodItemDialog.findViewById(R.id.addFoodImageButtonDialog);
-        imgText = (TextView) addFoodItemDialog.findViewById(R.id.foodImageNamePopUp);
-        final EditText foodItemName = (EditText)addFoodItemDialog.findViewById(R.id.dialog_food_item_name);
-        final EditText foodItemCalorie = (EditText)addFoodItemDialog.findViewById(R.id.dialog_food_item_calories);
-        final EditText foodItemPrice = (EditText)addFoodItemDialog.findViewById(R.id.dialog_food_item_price);
-        final ProgressBar pgb = (ProgressBar) addFoodItemDialog.findViewById(R.id.foodItemAddProgressBar);
+        Button cancel = addFoodItemDialog.findViewById(R.id.foodItemCancelButtonDialog);
+        Button save = addFoodItemDialog.findViewById(R.id.foodItemSaveButtonDialog);
+        Button addImg = addFoodItemDialog.findViewById(R.id.addFoodImageButtonDialog);
+        imgText = addFoodItemDialog.findViewById(R.id.foodImageNamePopUp);
+        final EditText foodItemName = addFoodItemDialog.findViewById(R.id.dialog_food_item_name);
+        final EditText foodItemCalorie = addFoodItemDialog.findViewById(R.id.dialog_food_item_calories);
+        final EditText foodItemPrice = addFoodItemDialog.findViewById(R.id.dialog_food_item_price);
+        final ProgressBar pgb = addFoodItemDialog.findViewById(R.id.foodItemAddProgressBar);
 
         pgb.setVisibility(View.INVISIBLE);
 

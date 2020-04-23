@@ -26,18 +26,19 @@
                 />
 
             <TextView
+                android:id="@+id/food_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/food_name"
-                android:layout_toRightOf="@+id/food_pic"
-                android:text="Backon, Egg and Cheese"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:textSize="15sp"
+                android:layout_toRightOf="@+id/food_pic"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Backon, Egg and Cheese"
                 android:textAllCaps="true"
-                android:textStyle="bold"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
 
 

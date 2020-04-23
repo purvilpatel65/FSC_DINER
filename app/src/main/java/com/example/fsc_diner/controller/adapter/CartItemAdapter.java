@@ -45,7 +45,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         private TextView _ingredientList;
         private ImageButton _dropButton;
         private ImageButton _upButton;
-        private Button _priceButton;
+        private TextView _priceButton;
         private CircularImageView _imageView;
 
         public ViewHolder(@NonNull View itemView) {

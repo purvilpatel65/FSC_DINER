@@ -21,6 +21,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class EmployeeRegistration extends AppCompatActivity {
@@ -60,7 +63,8 @@ public class EmployeeRegistration extends AppCompatActivity {
                     String email = emailTV.getText().toString();
                     String firstName = firstNameTV.getText().toString();
                     String lastName = lastNameTV.getText().toString();
-                    UserInformation employee = new UserInformation(email, firstName, lastName, "Employee");
+                    String currentDate = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(new Date());
+                    UserInformation employee = new UserInformation(email, firstName, lastName, "Employee", currentDate);
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(employee);
                     Intent i = new Intent(EmployeeRegistration.this, LoginActivity.class);
                     startActivity(i);
