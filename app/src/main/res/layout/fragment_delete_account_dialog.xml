@@ -28,11 +28,13 @@
 
     <EditText
         android:id="@+id/enterEmailDeleteAccountTV"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:background="@drawable/rounded_text_border"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/white_round_border"
         android:drawableStart="@drawable/ic_mail_outline_black"
         android:drawablePadding="5dp"
         android:hint="@string/email_address_confirm"
