@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:background="@drawable/white_round_border"
+            android:id="@+id/current_order_relative_layout_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/current_order_relative_layout_1_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/current_order_orderId_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Order ID"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/current_order_orderId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/current_order_orderId_label"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="0613"
+                    android:textSize="40dp"/>
+
+                <TextView
+                    android:id="@+id/current_order_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Cheese Burger"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/current_order_restaurant_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/current_order_item_name"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Burger Studio"
+                    android:textColor="@android:color/black"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/current_order_restaurant_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/current_order_item_name"
+                    android:layout_marginTop="10dp"
+                    android:layout_toLeftOf="@+id/current_order_restaurant_name"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Restaurant: "
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/current_order_quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/current_order_restaurant_name"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="2"
+                    android:textColor="@android:color/black"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/current_order_quantity_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/current_order_restaurant_name"
+                    android:layout_toLeftOf="@+id/current_order_quantity"
+                    android:fontFamily="@font/open_sans_semibold"
+                    android:text="Quantity: "
+                    android:textSize="15dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/current_order_relative_layout_1_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/current_order_relative_layout_1_1">
+
+                <com.shuhart.stepview.StepView
+                    android:id="@+id/current_order_step_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    app:sv_selectedCircleColor="@color/colorPrimary"
+                    app:sv_selectedTextColor="@android:color/darker_gray"
+                    app:sv_stepLineWidth="3dp"
+                    app:sv_stepPadding="4dp"
+                    app:sv_nextTextColor="@android:color/darker_gray"
+                    app:sv_nextStepLineColor="@android:color/darker_gray"
+                    app:sv_doneCircleColor="@color/colorPrimary"
+                    app:sv_doneStepLineColor="@color/colorPrimary"
+                    app:sv_doneTextColor="@color/colorPrimary"
+                    app:sv_doneCircleRadius="12dp"
+                    app:sv_selectedCircleRadius="12dp"
+                    app:sv_selectedStepNumberColor="@android:color/white"
+                    app:sv_stepViewStyle="@style/StepView"
+                    app:sv_doneStepMarkColor="@android:color/white"
+                    app:sv_stepNumberTextSize="12sp"
+                    app:sv_animationType="Line" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

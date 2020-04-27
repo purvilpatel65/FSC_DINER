@@ -3,5 +3,12 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/acme</item>
         <item>@font/andika</item>
+        <item>@font/montserrat</item>
+        <item>@font/nova_slim</item>
+        <item>@font/open_sans</item>
+        <item>@font/open_sans_bold</item>
+        <item>@font/open_sans_light</item>
+        <item>@font/open_sans_semibold</item>
+        <item>@font/playfair_display</item>
     </array>
 </resources>

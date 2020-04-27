@@ -71,12 +71,13 @@
                 android:id="@+id/item_details_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cheese Burger"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:text="Cheese Burger"
+                android:textColor="@android:color/white"
                 android:textSize="20dp"
-                android:layout_marginLeft="15dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/item_details_item_price"
@@ -107,17 +108,18 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-           <Button
+            <Button
                 android:id="@+id/item_details_add_to_cart_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="ADD TO CART"
-                android:textSize="15dp"
-                android:gravity="center|center_vertical"
-                android:paddingLeft="10dp"
-                android:drawableLeft="@drawable/ic_shopping_cart_black_24dp"
                 android:background="#D3D3D3"
-                android:onClick="onAddToCartPressed"/>
+                android:drawableLeft="@drawable/ic_shopping_cart_black_24dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:gravity="center|center_vertical"
+                android:onClick="onAddToCartPressed"
+                android:paddingLeft="10dp"
+                android:text="ADD TO CART"
+                android:textSize="15dp" />
 
 
         </LinearLayout>

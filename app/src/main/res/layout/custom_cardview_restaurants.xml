@@ -29,16 +29,16 @@
 
         <TextView
             android:id="@+id/cardview_res_name_customer_side"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:fontFamily="@font/open_sans_bold"
             android:text="@string/restaurant_1_name"
             android:textAlignment="center"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center_vertical|center_horizontal"
             android:textColor="@android:color/white"
             android:textSize="@dimen/card_view_text_size"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textStyle="bold" />
     </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

@@ -17,7 +17,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Pattern;
+
+import static java.util.Locale.*;
 
 public class UserRegistration extends AppCompatActivity {
     TextView firstNameTV, lastNameTV, emailTV, passwordTV, confirmPasswordTV;
@@ -51,7 +56,8 @@ public class UserRegistration extends AppCompatActivity {
                     String email = emailTV.getText().toString();
                     String firstName = firstNameTV.getText().toString();
                     String lastName = lastNameTV.getText().toString();
-                    UserInformation user = new UserInformation(email, firstName, lastName, "Customer");
+                    String currentDate = new SimpleDateFormat("MM/dd/yyyy", getDefault()).format(new Date());
+                    UserInformation user = new UserInformation(email, firstName, lastName, "Customer", currentDate);
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user);
                     Intent i = new Intent(UserRegistration.this, LoginActivity.class);
                     startActivity(i);
