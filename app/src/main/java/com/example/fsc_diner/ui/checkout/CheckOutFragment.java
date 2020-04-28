@@ -145,15 +145,14 @@ public class CheckOutFragment extends Fragment {
             final String currentOrderKey = mDatabaseRef.child("CurrentOrders").push().getKey();
 
             final OrderItem orderItem = new OrderItem(Integer.parseInt(orderId)
-                    , userName
-                    , userEmail
+                    , mAuth.getUid()
                     , item.getItemName()
                     , item.getRestaurantName()
                     , item.getRestaurantKey()
                     , item.getQuantity()
                     , currentOrderKey
                     , orderKey
-                    , 1
+                    , 2
                     , item.getIngredients());
 
             FirebaseDatabase.getInstance().getReference("Restaurant").child(item.getRestaurantKey()).child("Orders").child(orderKey).child(currentOrderKey)

@@ -65,7 +65,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="340dp"
-        android:layout_height="365dp"
+        android:layout_height="400dp"
         android:layout_marginTop="35dp"
         android:background="@drawable/white_gradient_color"
         android:fontFamily="sans-serif-condensed"
@@ -153,6 +153,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/employeeRegPassword" />
 
+
         <EditText
             android:id="@+id/employeeRegCode"
             style="@style/credentials"
@@ -168,6 +169,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/employeeRegConfirmPassword" />
 
+        <Spinner
+            android:id="@+id/employeeRestaurant"
+            android:layout_width="300dp"
+            android:layout_height="38dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/rounded_text_border"
+            android:drawableStart="@drawable/ic_key_outline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/employeeRegCode"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

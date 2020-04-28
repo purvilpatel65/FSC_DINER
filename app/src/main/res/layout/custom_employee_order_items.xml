@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <CheckBox
+        android:id="@+id/employee_order_items_cardview_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"/>
+
+
+    <TextView
+        android:id="@+id/employee_order_items_cardview_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cheese Burger"
+        android:layout_toRightOf="@+id/employee_order_items_cardview_checkbox"
+        android:layout_marginLeft="20dp"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:textAllCaps="true"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/employee_order_items_cardview_qnt_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/employee_order_items_cardview_title_text"
+        android:text="Quantity: "
+        android:layout_toRightOf="@+id/employee_order_items_cardview_checkbox"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:id="@+id/employee_order_items_cardview_qnt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/employee_order_items_cardview_title_text"
+        android:text="2"
+        android:layout_toRightOf="@+id/employee_order_items_cardview_qnt_label" />
+
+    <TextView
+        android:id="@+id/employee_order_items_cardview_ingredient_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingredients List"
+        android:textColor="@color/colorPrimary"
+        android:textAllCaps="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/employee_order_items_cardview_checkbox"
+        android:layout_below="@+id/employee_order_items_cardview_qnt_label"/>
+
+    <TextView
+        android:id="@+id/employee_order_items_cardview_ingredient_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ingredient List"
+        android:layout_marginTop="3dp"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/employee_order_items_cardview_ingredient_label"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/employee_order_items_cardview_checkbox" />
+
+    <RelativeLayout
+        android:id="@+id/employee_order_items_border_3"
+        android:layout_below="@+id/employee_order_items_cardview_ingredient_list"
+        android:background="#A1AAA9"
+        android:layout_width="match_parent"
+        android:layout_marginTop="2dp"
+        android:layout_height="2dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#d9d9d9"
+    tools:context=".controller.MainActivityEmployeeSide">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/employee_order_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        tools:ignore="MissingConstraints"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/employee_order_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/employee_order_toolbar_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="logout"
+            android:textColor="@android:color/white"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/employee_orders_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/employee_order_toolbar" />
+
+</RelativeLayout>

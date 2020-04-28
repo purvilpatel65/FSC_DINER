@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fsc_diner.R;
 import com.example.fsc_diner.model.OrderItem;
@@ -74,8 +75,6 @@ public class CurrentOrdersAdapter extends RecyclerView.Adapter<CurrentOrdersAdap
         }}).commit();
 
         holder._stepView.go(holder._stepView.getCurrentStep() + (_items.get(position).getStatus() - (holder._stepView.getCurrentStep()+1)), true);
-
-
 
     }
 

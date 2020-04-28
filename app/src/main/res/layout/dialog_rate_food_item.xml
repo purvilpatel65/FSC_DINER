@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white"
+    android:layout_width="400dp"
+    android:layout_height="230dp">
+
+    <RelativeLayout
+        android:id="@+id/rate_relative_1"
+        android:layout_width="400dp"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rate Your Plate"
+            android:textSize="25dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageButton
+            android:id="@+id/rate_cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_cancel"
+            android:background="@android:color/transparent"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rate_relative_2"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rate_relative_1">
+
+        <RatingBar
+            android:id="@+id/rate_ratingbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:numStars="5"
+            android:rating="3"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:id="@+id/rate_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Good"
+            android:layout_below="@+id/rate_ratingbar"
+            android:textSize="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rate_relative_3"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rate_relative_2">
+
+        <Button
+            android:id="@+id/rate_send_button"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#C14242"
+            android:layout_marginTop="15dp"
+            android:textSize="18dp"
+            android:text="Send Feedback"
+            android:textColor="@android:color/white"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

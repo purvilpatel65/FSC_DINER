@@ -17,7 +17,7 @@ public class CartItem {
 
     public  CartItem(){}
 
-    public CartItem(String itemName, String restaurantName, String resKey, int quantity, String cartItemKey, String img, List<HashMap<String, List<String>>> ingredients) {
+    public CartItem(String itemName, String restaurantName, String resKey, int quantity, double totalPrice, String cartItemKey, String img, List<HashMap<String, List<String>>> ingredients) {
         this.itemName = itemName;
         this.restaurantName = restaurantName;
         this.restaurantKey = resKey;

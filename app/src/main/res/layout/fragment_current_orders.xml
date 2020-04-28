@@ -4,14 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#f2f2f2"
+    android:background="#d9d9d9"
     tools:context=".ui.currentOrders.CurrentOrdersFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/current_order_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/cart_item_check_out_button"/>
+        android:layout_marginTop="10dp" />
 
 </ScrollView>

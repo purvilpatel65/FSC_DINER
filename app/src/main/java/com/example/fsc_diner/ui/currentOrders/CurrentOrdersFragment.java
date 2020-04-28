@@ -39,10 +39,8 @@ public class CurrentOrdersFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<OrderItem> currentOrderItem = new ArrayList<>();
+    private List<String> currentOrderItemsKey = new ArrayList<>();
 
-    public static CurrentOrdersFragment newInstance() {
-        return new CurrentOrdersFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -71,10 +69,10 @@ public class CurrentOrdersFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onStart(){
+        super.onStart();
 
-        // TODO: Use the ViewModel
+        addCurrentOrdersList();
     }
 
     private void addCurrentOrdersList(){
@@ -82,6 +80,7 @@ public class CurrentOrdersFragment extends Fragment {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 currentOrderItem.add(dataSnapshot.getValue(OrderItem.class));
+                currentOrderItemsKey.add(dataSnapshot.getKey().toString());
                 mAdapter.notifyDataSetChanged();
             }
 
@@ -99,8 +98,23 @@ public class CurrentOrdersFragment extends Fragment {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-               currentOrderItem.remove(dataSnapshot.getValue(OrderItem.class));
-               mAdapter.notifyDataSetChanged();
+
+//                for(OrderItem tempItem: currentOrderItem){
+//
+//                    if(tempItem.getCurrentOrderItemKey().equals(dataSnapshot.getValue(OrderItem.class).getCurrentOrderItemKey())) {
+//                        currentOrderItem.remove(tempItem);
+//                        mAdapter.notifyDataSetChanged();
+//                    }
+//                }
+
+                int tempIndex = currentOrderItemsKey.indexOf(dataSnapshot.getKey().toString());
+
+                if(tempIndex != -1){
+                    currentOrderItem.remove(tempIndex);
+                    currentOrderItemsKey.remove(tempIndex);
+                    mAdapter.notifyDataSetChanged();
+                }
+
             }
 
             @Override

@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.fsc_diner.R;
+import com.example.fsc_diner.model.UserInformation;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,14 +57,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkUserType(){
 
-       mDatabaseRef.child(mAuth.getUid()).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
+       mDatabaseRef.child(mAuth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
            @Override
            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-               String type = dataSnapshot.getValue(String.class);
+               UserInformation tempInfo = dataSnapshot.getValue(UserInformation.class);
 
-               if(type.equals("Manager")){
+               if(tempInfo.getUserType().equals("Manager")){
                    Intent i = new Intent(getApplicationContext(), MainActivityManagerSide.class);
+                   startActivity(i);
+                   finish();
+               }
+               else if(tempInfo.getUserType().equals("Employee")){
+
+                   Intent i = new Intent(getApplicationContext(), MainActivityEmployeeSide.class);
+                   i.putExtra("ResKey", tempInfo.getRestaurantKey());
+                   i.putExtra("EmpName", tempInfo.getFullName());
                    startActivity(i);
                    finish();
                }
