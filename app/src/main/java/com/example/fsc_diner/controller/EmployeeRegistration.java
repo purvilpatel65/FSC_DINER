@@ -7,11 +7,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.fsc_diner.R;
+import com.example.fsc_diner.model.RestaurantInfo;
+import com.example.fsc_diner.model.UserInformation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,15 +27,24 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 import java.util.regex.Pattern;
+
+import static java.util.Locale.getDefault;
 
 public class EmployeeRegistration extends AppCompatActivity {
     TextView firstNameTV, lastNameTV, emailTV, passwordTV, confirmPasswordTV, registrationCodeTV;
+    Spinner resSpinner;
     FirebaseAuth mFirebaseAuth;
     String empPW, manPW;
     OnCompleteListener onCompleteListener;
+
+    private List<String> resName = new ArrayList<>();
+    private List<String> resKey = new ArrayList<>();
+    String selectedRestaurantKey = "";
+
     // Password pattern is created using Regular Expressions to be used in password validation method
     public static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
@@ -53,18 +67,36 @@ public class EmployeeRegistration extends AppCompatActivity {
         passwordTV = findViewById(R.id.employeeRegPassword);
         confirmPasswordTV = findViewById(R.id.employeeRegConfirmPassword);
         registrationCodeTV = findViewById(R.id.employeeRegCode);
+        resSpinner = findViewById(R.id.employeeRestaurant);
+
+        resName.add("Select Restaurant");
+        resKey.add(null);
+        populateRestaurantList();
+        setUpSpinner();
+
 
         onCompleteListener = new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
                 if (!task.isSuccessful()) {
                     Toast.makeText(EmployeeRegistration.this, "SignUp Unsuccessful, Please Try Again", Toast.LENGTH_SHORT).show();
-                } else {
+                } else if(task.isSuccessful() && validateCode().equals("emp")){
                     String email = emailTV.getText().toString();
                     String firstName = firstNameTV.getText().toString();
                     String lastName = lastNameTV.getText().toString();
-                    String currentDate = new SimpleDateFormat("MM/dd/yyyy", Locale.getDefault()).format(new Date());
-                    UserInformation employee = new UserInformation(email, firstName, lastName, "Employee", currentDate);
+                    String currentDate = new SimpleDateFormat("MM/dd/yyyy", getDefault()).format(new Date());
+                    UserInformation employee = new UserInformation(email, firstName, lastName, "Employee", selectedRestaurantKey, currentDate);
+                    FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(employee);
+                    Intent i = new Intent(EmployeeRegistration.this, LoginActivity.class);
+                    startActivity(i);
+                    Animatoo.animateFade(EmployeeRegistration.this);
+                    finish();
+                } else if(task.isSuccessful() && validateCode().equals("man")){
+                    String email = emailTV.getText().toString();
+                    String firstName = firstNameTV.getText().toString();
+                    String lastName = lastNameTV.getText().toString();
+                    String currentDate = new SimpleDateFormat("MM/dd/yyyy", getDefault()).format(new Date());
+                    UserInformation employee = new UserInformation(email, firstName, lastName, "Manager", currentDate);
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(employee);
                     Intent i = new Intent(EmployeeRegistration.this, LoginActivity.class);
                     startActivity(i);
@@ -73,6 +105,7 @@ public class EmployeeRegistration extends AppCompatActivity {
                 }
             }
         };
+
     }
 
     @Override
@@ -88,7 +121,7 @@ public class EmployeeRegistration extends AppCompatActivity {
         final String email = emailTV.getText().toString();
         final String password = confirmPasswordTV.getText().toString();
 
-        if (allConditionsMet() == true) {
+        if (allConditionsMet()) {
             mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, onCompleteListener);
         }
     }
@@ -198,14 +231,29 @@ public class EmployeeRegistration extends AppCompatActivity {
         }
     }
 
-    public boolean validateCode() {
+    public boolean validateRestaurantSpinner(){
+
+        String getType = validateCode();
+
+        if(getType.equals("emp") && (resKey.equals(null) || resKey.equals(""))){
+            Toast.makeText(this, "If you're registering as an employee then you must choose the restaurant!", Toast.LENGTH_LONG);
+            return false;
+        }
+
+        return true;
+    }
+
+    public String validateCode() {
         String code = registrationCodeTV.getText().toString();
-        if(code.equals(empPW) || code.equals(manPW)){
+        if(code.equals(empPW)){
             registrationCodeTV.setError(null);
-            return true;
+            return "emp";
+        }else if(code.equals(manPW)){
+            registrationCodeTV.setError(null);
+            return "man";
         }else{
             registrationCodeTV.setError("Incorrect Registration Code");
-            return false;
+            return "";
         }
     }
 
@@ -223,8 +271,9 @@ public class EmployeeRegistration extends AppCompatActivity {
         validatePassword();
         validateCode();
 
-        if (validateFirstName() == true && validateLastName() == true
-                && validateEmail() == true && validatePassword() == true && validateCode() == true) {
+        if (validateFirstName() && validateLastName()
+                && validateEmail()  && validatePassword()  && validateRestaurantSpinner() &&
+                (validateCode().equals("emp") || validateCode().equals("man"))) {
             return true;
         } else {
             return false;
@@ -255,4 +304,49 @@ public class EmployeeRegistration extends AppCompatActivity {
 
         });
     }
+
+    private void populateRestaurantList(){
+
+        FirebaseDatabase.getInstance().getReference("Restaurant").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()){
+
+                    RestaurantInfo tempRes = snapshot.getValue(RestaurantInfo.class);
+                    resName.add(tempRes.getRestaurantname());
+                    resKey.add(tempRes.getRestaurantKey());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void setUpSpinner(){
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, resName);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        resSpinner.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        resSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                int tempIndex = resName.indexOf(parent.getItemAtPosition(position).toString());
+                selectedRestaurantKey = resKey.get(tempIndex);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
 }

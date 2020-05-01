@@ -4,29 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/green_gradient_background"
+    android:background="@drawable/light_gradient_background"
     android:orientation="vertical"
     tools:context=".controller.SplashScreen">
 
     <ImageView
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center"
         android:id="@+id/imageView3"
-        android:layout_width="206dp"
-        android:layout_height="172dp"
+        android:layout_width="213dp"
+        android:layout_height="212dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/circular_splash_border"
         android:elevation="30dp"
-        app:srcCompat="@drawable/farmingdale_logo" />
+        android:padding="7dp"
+        app:srcCompat="@drawable/fsc_ram_splash" />
 
     <ProgressBar
+        android:elevation="50dp"
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_marginTop="100dp"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:indeterminateDuration="1"
+        android:layout_width="94dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="40dp" />
 
     <TextView
+        android:elevation="50dp"
         android:id="@+id/textView6"
         style="@style/TextHighlight"
         android:layout_width="match_parent"

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@drawable/light_gradient_background"
-    tools:context=".ui.currentOrders.CurrentOrdersFragment">
+    android:background="@drawable/light_gradient_background">
 
     <TextView
-        android:id="@+id/cart_header"
+        android:id="@+id/active_orders_header"
         style="@style/TextHighlight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,15 +15,13 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/open_sans_semibold"
-        android:text="@string/orders_placed"
+        android:text="@string/active_orders"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/current_order_recycler_view"
+        android:id="@+id/employee_orders_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

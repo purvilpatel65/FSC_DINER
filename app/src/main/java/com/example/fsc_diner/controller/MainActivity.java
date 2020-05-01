@@ -33,9 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
-
-        checkUserType();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users").child(mAuth.getUid());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
@@ -52,28 +50,5 @@ public class MainActivity extends AppCompatActivity {
         if(getIntent().getBooleanExtra("IsComingFromCartButton", false)) navController.navigate(R.id.navigation_CheckOutBag);
 
     }
-
-    private void checkUserType(){
-
-       mDatabaseRef.child(mAuth.getUid()).child("userType").addListenerForSingleValueEvent(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-               String type = dataSnapshot.getValue(String.class);
-
-               if(type.equals("Manager")){
-                   Intent i = new Intent(getApplicationContext(), MainActivityManagerSide.class);
-                   startActivity(i);
-                   finish();
-               }
-           }
-
-           @Override
-           public void onCancelled(@NonNull DatabaseError databaseError) {
-
-           }
-       });
-    }
-
 
 }

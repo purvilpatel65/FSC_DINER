@@ -1,4 +1,4 @@
-package com.example.fsc_diner.controller;
+package com.example.fsc_diner.model;
 
 // Class contains necessary member variables for storing User Information into the Database
 public class UserInformation {
@@ -8,6 +8,7 @@ public class UserInformation {
     public String fullName;
     public String userType;
     public String joinDate;
+    private String restaurantKey;
 
     // Constructor used for email and password login users
     public UserInformation(String email, String firstName, String lastName, String userType){
@@ -22,6 +23,15 @@ public class UserInformation {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userType = userType;
+        this.joinDate = joinDate;
+    }
+
+    public UserInformation(String email, String firstName, String lastName, String userType, String restaurantKey, String joinDate){
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userType = userType;
+        this.restaurantKey = restaurantKey;
         this.joinDate = joinDate;
     }
 
@@ -53,4 +63,11 @@ public class UserInformation {
 
     public String getJoinDate(){return joinDate;}
 
+    public String getRestaurantKey() {
+        return restaurantKey;
+    }
+
+    public void setRestaurantKey(String restaurantKey) {
+        restaurantKey = restaurantKey;
+    }
 }

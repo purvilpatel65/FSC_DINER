@@ -1,6 +1,5 @@
 package com.example.fsc_diner.ui.checkout;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +21,10 @@ import com.example.fsc_diner.model.CartItem;
 import com.example.fsc_diner.model.OrderItem;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.wallet.IsReadyToPayRequest;
+import com.google.android.gms.wallet.PaymentsClient;
+import com.google.android.gms.wallet.Wallet;
+import com.google.android.gms.wallet.WalletConstants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -34,9 +35,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 public class CheckOutFragment extends Fragment {
@@ -60,6 +66,8 @@ public class CheckOutFragment extends Fragment {
     private Button payNowButton;
     private TextView subtotalTV;
 
+    private PaymentsClient paymentsClient;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         checkOutViewModel =
@@ -69,6 +77,9 @@ public class CheckOutFragment extends Fragment {
         mStorageRef = FirebaseStorage.getInstance().getReference("Images");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
         mAuth = FirebaseAuth.getInstance();
+
+        Wallet.WalletOptions walletOptions = new Wallet.WalletOptions.Builder().setEnvironment(WalletConstants.ENVIRONMENT_TEST).build();
+        paymentsClient = Wallet.getPaymentsClient(getContext(), walletOptions);
 
         uid = mAuth.getUid();
         mRecyclerView = root.findViewById(R.id.cart_item_recycler_view);
@@ -109,15 +120,15 @@ public class CheckOutFragment extends Fragment {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.getChildrenCount() > 0){
+                if (dataSnapshot.getChildrenCount() > 0) {
                     double totalSum = 0.00;
-                    for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
                         double indSum = ds.child("totalPrice").getValue(Double.class).doubleValue();
                         totalSum = totalSum + indSum;
                     }
 
                     subtotalTV.setText("Your cart total is: $" + new DecimalFormat("0.00").format(totalSum));
-                }else{
+                } else {
                     subtotalTV.setText("Your cart is currently empty");
                 }
             }
@@ -131,7 +142,7 @@ public class CheckOutFragment extends Fragment {
         return root;
     }
 
-    private void addCartItemList(){
+    private void addCartItemList() {
 
         mDatabaseRef.child(uid).child("Cart").addChildEventListener(new ChildEventListener() {
             @Override
@@ -175,15 +186,14 @@ public class CheckOutFragment extends Fragment {
             final String currentOrderKey = mDatabaseRef.child("CurrentOrders").push().getKey();
 
             final OrderItem orderItem = new OrderItem(Integer.parseInt(orderId)
-                    , userName
-                    , userEmail
+                    , mAuth.getUid()
                     , item.getItemName()
                     , item.getRestaurantName()
                     , item.getRestaurantKey()
                     , item.getQuantity()
                     , currentOrderKey
                     , orderKey
-                    , 1
+                    , 2
                     , item.getIngredients());
 
             FirebaseDatabase.getInstance().getReference("Restaurant").child(item.getRestaurantKey()).child("Orders").child(orderKey).child(currentOrderKey)
@@ -221,6 +231,7 @@ public class CheckOutFragment extends Fragment {
 
         }
     }
+
     private void setUserEmail() {
         mDatabaseRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -6,24 +6,26 @@ import java.util.List;
 public class OrderItem {
 
     private int orderID;
-    private String customerName;
-    private String customerEmail;
+    private String custometUID;
     private String itemName;
     private String restaurantName;
     private String restaurantKey;
     private int quantity;
     private String currentOrderItemKey;
     private String employeeOrderItemKey;
-    private String image;
     private int status;
     private List<HashMap<String, List<String>>> ingredients;
+    private String handledBy;
 
     public OrderItem(){}
 
-    public OrderItem(int orderID, String customerName, String customerEmail, String itemName, String restaurantName, String restaurantKey, int quantity, String currentOrderItemKey, String employeeOrderItemKey, int status, List<HashMap<String, List<String>>> ingredients) {
+    public OrderItem(int orderID, String cusUid, String itemName, String restaurantName, String restaurantKey, int quantity, String currentOrderItemKey, String employeeOrderItemKey, int status, List<HashMap<String, List<String>>> ingredients) {
+        this(orderID, cusUid, itemName, restaurantName, restaurantKey, quantity, currentOrderItemKey, employeeOrderItemKey, status, ingredients, "");
+    }
+
+    public OrderItem(int orderID, String custometUID, String itemName, String restaurantName, String restaurantKey, int quantity, String currentOrderItemKey, String employeeOrderItemKey, int status, List<HashMap<String, List<String>>> ingredients, String handledBy) {
         this.orderID = orderID;
-        this.customerName = customerName;
-        this.customerEmail = customerEmail;
+        this.custometUID = custometUID;
         this.itemName = itemName;
         this.restaurantName = restaurantName;
         this.restaurantKey = restaurantKey;
@@ -32,6 +34,7 @@ public class OrderItem {
         this.employeeOrderItemKey = employeeOrderItemKey;
         this.status = status;
         this.ingredients = ingredients;
+        this.handledBy = handledBy;
     }
 
     public int getOrderID() {
@@ -106,19 +109,19 @@ public class OrderItem {
         this.ingredients = ingredients;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getCustometUID() {
+        return custometUID;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCustometUID(String custometUID) {
+        this.custometUID = custometUID;
     }
 
-    public String getCustomerEmail() {
-        return customerEmail;
+    public String getHandledBy() {
+        return handledBy;
     }
 
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
+    public void setHandledBy(String handledBy) {
+        this.handledBy = handledBy;
     }
 }

@@ -3,8 +3,10 @@ package com.example.fsc_diner.controller;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +18,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Pattern;
 
@@ -113,20 +120,15 @@ public class LoginActivity extends AppCompatActivity {
         if (password.isEmpty()) {
             passwordTV.setError("Missing password field");
             return false;
-        } else if (!PASSWORD_PATTERN.matcher(password).matches()) {
-            passwordTV.setError("Password must: " +
-                    "\n- Be at least seven characters long" +
-                    "\n- Have at least one capital letter" +
-                    "\n- Have at least one lowercase letter" +
-                    "\n- Have at least one number" +
-                    "\n- Have at least one special character");
-            return false;
         } else {
             passwordTV.setError(null);
             return true;
         }
     }
 
+
+    /**
+    // This here below is optional
     public void updateUI(FirebaseUser user) {
 
         if (user != null) {
@@ -148,4 +150,52 @@ public class LoginActivity extends AppCompatActivity {
             updateUI(currentUser);
         }
     }
+    **/
+
+    private void updateUI(FirebaseUser user) {
+
+        if(user != null) {
+
+            DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users").child(user.getUid());
+            mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    String type = dataSnapshot.child("userType").getValue(String.class);
+                    String resKey = dataSnapshot.child("restaurantKey").getValue(String.class);
+                    String firstName = dataSnapshot.child("firstName").getValue(String.class);
+                    String lastName = dataSnapshot.child("lastName").getValue(String.class);
+                    String fullName = firstName + " " + lastName;
+
+                    if(type.equals("Customer")){
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(i);
+                        //Animatoo.animateFade((Activity)getApplicationContext());
+                        finish();
+                    }else if (type.equals("Manager")) {
+                        Intent i = new Intent(LoginActivity.this, MainActivityManagerSide.class);
+                        startActivity(i);
+                        //Animatoo.animateFade(getApplicationContext());
+                        finish();
+                    } else if (type.equals("Employee")) {
+                        Intent i = new Intent(LoginActivity.this, MainActivityEmployee.class);
+                        i.putExtra("ResKey", resKey);
+                        i.putExtra("EmpName", fullName);
+                        startActivity(i);
+                        //Animatoo.animateFade(getApplicationContext());
+                        finish();
+                    }else{
+                        recreate();
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
 }

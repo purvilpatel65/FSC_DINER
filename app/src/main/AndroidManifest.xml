@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.fsc_diner">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
@@ -13,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.FoodItemDetails" android:parentActivityName=".controller.RestaurantFoodMenu"></activity>
+        <activity android:name=".controller.MainActivityEmployee"></activity>
+        <activity
+            android:name=".controller.FoodItemDetails"
+            android:parentActivityName=".controller.RestaurantFoodMenu" />
         <activity
             android:name=".controller.AddIngredientsManagerSide"
             android:parentActivityName=".controller.FoodMenuManagerSide" />
@@ -26,25 +27,28 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".controller.RestaurantFoodMenu"
             android:parentActivityName=".controller.MainActivity" />
         <activity
             android:name=".controller.LoginActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity android:name=".controller.MainActivity">
-        </activity>
+            android:label="@string/app_name"></activity>
+        <activity android:name=".controller.MainActivity" />
         <activity android:name=".controller.UserRegistration" />
         <activity android:name=".controller.EmployeeRegistration" />
-        <activity android:name=".controller.MainActivityManagerSide">
-        </activity>
+        <activity android:name=".controller.MainActivityManagerSide" />
+        <activity android:name=".controller.OrderItemEmployeeSide" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
     </application>
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>
