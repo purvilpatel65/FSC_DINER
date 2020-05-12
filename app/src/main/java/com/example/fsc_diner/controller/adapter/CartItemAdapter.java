@@ -85,7 +85,6 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
                 .into(holder._imageView);
 
         List<HashMap<String, List<String>>> tempIngredients = _items.get(position).getIngredients();
-        SpannableStringBuilder builder = new SpannableStringBuilder();
 
         String  finalIngredientsList = "";
 

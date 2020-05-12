@@ -34,7 +34,7 @@
         android:layout_marginTop="15dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/white_round_border"
+        android:background="@drawable/white_square_text_border"
         android:drawableStart="@drawable/ic_mail_outline_black"
         android:drawablePadding="5dp"
         android:hint="@string/email_address_confirm"

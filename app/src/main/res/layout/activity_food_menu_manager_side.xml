@@ -2,9 +2,12 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/light_gradient_background"
+    android:id="@+id/food_menu_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.FoodMenuManagerSide">
+    android:paddingBottom="60dp"
+    tools:context=".controller.FoodMenuManagerFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar_food_menu"
@@ -12,10 +15,11 @@
         android:layout_height="?attr/actionBarSize"
         android:elevation="4dp"
         tools:ignore="MissingConstraints"
-        android:background="@color/colorPrimary">
+        android:background="@color/red">
 
         <TextView
             android:id="@+id/toolbar_title_food_menu"
+            android:fontFamily="@font/open_sans_bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -36,8 +40,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/red"
         android:src="@drawable/ic_add_black_24dp"
-        android:onClick="onFoodItemAdd"
-        android:layout_margin="16dp" />
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/red" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

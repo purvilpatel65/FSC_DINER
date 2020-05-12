@@ -1,20 +1,14 @@
 package com.example.fsc_diner.ui.currentOrders;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.example.fsc_diner.R;
 import com.example.fsc_diner.controller.adapter.CurrentOrdersAdapter;
 import com.example.fsc_diner.model.OrderItem;
@@ -30,35 +24,24 @@ import java.util.List;
 
 public class CurrentOrdersFragment extends Fragment {
 
-    private CurrentOrdersViewModel currentOrderViewModel;
     private DatabaseReference mDatabaseRef;
-    private FirebaseAuth mAuth;
     private String uid;
-
-    private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private List<OrderItem> currentOrderItem = new ArrayList<>();
 
-    public static CurrentOrdersFragment newInstance() {
-        return new CurrentOrdersFragment();
-    }
-
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        currentOrderViewModel = ViewModelProviders.of(this).get(CurrentOrdersViewModel.class);
         View root = inflater.inflate(R.layout.fragment_current_orders, container, false);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
         uid = mAuth.getUid();
-        mRecyclerView = root.findViewById(R.id.current_order_recycler_view);
+        RecyclerView mRecyclerView = root.findViewById(R.id.current_order_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new CurrentOrdersAdapter(getContext(), currentOrderItem);
@@ -68,13 +51,6 @@ public class CurrentOrdersFragment extends Fragment {
 
         return root;
 
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        // TODO: Use the ViewModel
     }
 
     private void addCurrentOrdersList(){

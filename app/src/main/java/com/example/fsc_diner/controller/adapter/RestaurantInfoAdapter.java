@@ -2,6 +2,7 @@ package com.example.fsc_diner.controller.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,11 +13,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fsc_diner.R;
-import com.example.fsc_diner.controller.FoodMenuManagerSide;
+import com.example.fsc_diner.controller.AddRestaurantDialog;
+import com.example.fsc_diner.controller.DeleteRestaurantDialog;
+import com.example.fsc_diner.controller.EditRestaurantDialog;
+import com.example.fsc_diner.controller.FoodMenuManagerFragment;
+import com.example.fsc_diner.controller.MainActivity;
 import com.example.fsc_diner.model.RestaurantInfo;
 import com.squareup.picasso.Picasso;
 
@@ -59,13 +66,11 @@ public class RestaurantInfoAdapter extends RecyclerView.Adapter<RestaurantInfoAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RestaurantInfoAdapter.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull RestaurantInfoAdapter.ViewHolder holder, final int position) {
         final String tempName = _restaurant.get(position).getRestaurantname();
         final String tempKey = _restaurant.get(position).getRestaurantKey();
 
         holder._restaurantName.setText(tempName);
-
 
         Picasso.get()
                 .load(_restaurant.get(position).getRestaurantImage())
@@ -74,23 +79,33 @@ public class RestaurantInfoAdapter extends RecyclerView.Adapter<RestaurantInfoAd
         holder._cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putString("RestaurantName",tempName);
+                args.putString("RestaurantKey",tempKey);
+                FoodMenuManagerFragment fmf = new FoodMenuManagerFragment();
+                fmf.setArguments(args);
 
-                Intent intent = new Intent(v.getContext(), FoodMenuManagerSide.class);
-                intent.putExtra("RestaurantName", tempName);
-                intent.putExtra("RestaurantKey", tempKey);
-                v.getContext().startActivity(intent);
+                FragmentTransaction fragmentTransaction = ((AppCompatActivity)v.getContext()).getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_manager, fmf);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
 
         holder._cardView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
-            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            public void onCreateContextMenu(ContextMenu menu, final View v, ContextMenu.ContextMenuInfo menuInfo) {
 
                 menu.add("Edit").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-
+                        EditRestaurantDialog dialog = new EditRestaurantDialog();
+                        Bundle args = new Bundle();
+                        args.putString("RestaurantName",tempName);
+                        args.putString("RestaurantKey",tempKey);
+                        dialog.setArguments(args);
+                        dialog.show(((AppCompatActivity)v.getContext()).getSupportFragmentManager(),"EditResDialog");
                         //do something
                         return true;
                     }
@@ -99,8 +114,12 @@ public class RestaurantInfoAdapter extends RecyclerView.Adapter<RestaurantInfoAd
                 menu.add("Delete").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-
-                        //do something
+                        DeleteRestaurantDialog dialog = new DeleteRestaurantDialog();
+                        Bundle args = new Bundle();
+                        args.putString("RestaurantName",tempName);
+                        args.putString("RestaurantKey",tempKey);
+                        dialog.setArguments(args);
+                        dialog.show(((AppCompatActivity)v.getContext()).getSupportFragmentManager(),"DeleteResDialog");
                         return true;
                     }
                 });

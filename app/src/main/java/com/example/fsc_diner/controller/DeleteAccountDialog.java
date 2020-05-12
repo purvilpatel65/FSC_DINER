@@ -32,7 +32,6 @@ public class DeleteAccountDialog extends DialogFragment {
     private TextView closeFragment;
     private TextView enterEmailTV;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,19 +48,19 @@ public class DeleteAccountDialog extends DialogFragment {
         confirmDeleteAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(user != null && confirmEmail()){
+                if(user != null && confirmEmail() == true){
                     user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful())
                             {
+                                //getDialog().dismiss();
                                 FirebaseAuth.getInstance().signOut();
                                 Intent i = new Intent(getActivity(), LoginActivity.class);
                                 startActivity(i);
                                 getActivity().finish();
                                 databaseReference.removeValue();
                                 storageReference.delete();
-                                //getDialog().dismiss();
                                 Toast.makeText(getActivity().getApplicationContext(), R.string.account_delete_success, Toast.LENGTH_SHORT).show();
                             }
                             else
@@ -101,6 +100,7 @@ public class DeleteAccountDialog extends DialogFragment {
         }
         else
         {
+            Toast.makeText(getActivity().getApplicationContext(), "You have entered the wrong email", Toast.LENGTH_SHORT).show();
             return false;
         }
     }

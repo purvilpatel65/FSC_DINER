@@ -2,26 +2,22 @@ package com.example.fsc_diner.controller;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.fsc_diner.R;
+import com.example.fsc_diner.model.UserInformation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.regex.Pattern;
-
 import static java.util.Locale.*;
 
 public class UserRegistration extends AppCompatActivity {
@@ -34,7 +30,7 @@ public class UserRegistration extends AppCompatActivity {
                     "(?=.*[0-9])" +         //1 digit minimum
                     "(?=.*[a-z])" +         //1 lowercase letter minimum
                     "(?=.*[A-Z])" +         //1 lowercase letter maximum
-                    "(?=.*[@#$%^&+=])" +    //1 special character minimum
+                    "(?=.*[@#$!%^&+=])" +    //1 special character minimum
                     "(?=\\S+$)" +           //no spaces allowed
                     ".{7,}" );              //7 character minimum
     @Override
@@ -81,7 +77,7 @@ public class UserRegistration extends AppCompatActivity {
         final String email = emailTV.getText().toString();
         final String password = confirmPasswordTV.getText().toString();
 
-        if (allConditionsMet() == true) {
+        if (allConditionsMet()) {
             mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, onCompleteListener);
         }
 
@@ -99,7 +95,7 @@ public class UserRegistration extends AppCompatActivity {
         if (firstNameTV.getText().toString().equals("")) {
             firstNameTV.setError("Missing first name field");
             return false;
-        } else if (firstNameTV.getText().toString().length() <= 3 && firstNameTV.getText().toString().length() > 0) {
+        } else if (firstNameTV.getText().toString().length() < 3 && firstNameTV.getText().toString().length() > 0) {
             firstNameTV.setError("First name must be at least 3 characters long");
             return false;
         } else if (firstNameTV.getText().toString().length() > 30) {
@@ -205,8 +201,8 @@ public class UserRegistration extends AppCompatActivity {
         validateEmail();
         validatePassword();
 
-        if (validateFirstName() == true && validateLastName() == true
-                && validateEmail() == true && validatePassword() == true) {
+        if (validateFirstName() && validateLastName()
+                && validateEmail() && validatePassword()) {
             return true;
         } else {
             return false;
@@ -216,7 +212,7 @@ public class UserRegistration extends AppCompatActivity {
     public void employeeRegistration(View view){
         Intent i = new Intent(UserRegistration.this, EmployeeRegistration.class);
         startActivity(i);
-        Animatoo.animateSlideUp(this);
+        Animatoo.animateFade(this);
         finish();
     }
 }

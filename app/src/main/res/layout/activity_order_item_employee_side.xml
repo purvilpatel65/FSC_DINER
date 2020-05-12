@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.OrderItemEmployeeSide">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/employee_order_items_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        tools:ignore="MissingConstraints"
+        android:background="@color/red">
+
+        <TextView
+            android:id="@+id/employee_order_items_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:fontFamily="@font/open_sans_bold"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_gravity="center" />
+
+        <ImageButton
+            android:id="@+id/employee_order_items_toolbar_back_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back_pressed"
+            android:background="@android:color/transparent"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <RelativeLayout
+        android:id="@+id/employee_order_items_info"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:layout_below="@+id/employee_order_items_toolbar"
+        android:layout_marginTop="10dp"
+        android:background="#f2f2f2">
+
+        <TextView
+            android:id="@+id/employee_order_items_orderId_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order ID: "
+            android:textColor="#22262c"
+            android:textSize="15sp"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/employee_order_items_orderId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#22262c"
+            android:textSize="15sp"
+            android:layout_marginTop="2dp"
+            android:textStyle="bold"
+            android:layout_toEndOf="@+id/employee_order_items_orderId_label" />
+
+        <TextView
+            android:id="@+id/employee_order_items_customer_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customer Name: "
+            android:textColor="#22262c"
+            android:textSize="15sp"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="20dp"
+            android:layout_below="@+id/employee_order_items_orderId_label"/>
+
+        <TextView
+            android:id="@+id/employee_order_items_customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#22262c"
+            android:textSize="15sp"
+            android:layout_marginTop="2dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/employee_order_items_orderId_label"
+            android:layout_toRightOf="@+id/employee_order_items_customer_label" />
+
+        <TextView
+            android:id="@+id/employee_order_items_customer_email_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email: "
+            android:textColor="#22262c"
+            android:textSize="15sp"
+            android:layout_below="@+id/employee_order_items_customer_label"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/employee_order_items_customer_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#22262c"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/employee_order_items_customer_name"
+            android:layout_toEndOf="@+id/employee_order_items_customer_email_label"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:id="@+id/employee_order_items_handledBy_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Handled By: "
+            android:textColor="#22262c"
+            android:textSize="15sp"
+            android:layout_below="@+id/employee_order_items_customer_email_label"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/employee_order_items_handledBy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#22262c"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/employee_order_items_customer_email_label"
+            android:layout_toEndOf="@+id/employee_order_items_handledBy_label"
+            android:layout_marginTop="2dp" />
+
+        <TextView
+            android:id="@+id/employee_order_items_status_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Status: "
+            android:textColor="#22262c"
+            android:textSize="15sp"
+            android:layout_below="@+id/employee_order_items_handledBy_label"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/employee_order_items_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#22262c"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_below="@+id/employee_order_items_handledBy_label"
+            android:layout_toEndOf="@+id/employee_order_items_status_label"
+            android:layout_marginTop="2dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/employee_order_items_border_3"
+        android:layout_below="@+id/employee_order_items_info"
+        android:background="#A1AAA9"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_height="2dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/employee_order_items_recycler_view"
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/employee_order_items_border_3"/>
+
+    <ng.max.slideview.SlideView
+        android:id="@+id/employee_order_items_slider_button"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="2dp"
+        app:sv_slideBackgroundColor="#4D6070"
+        app:sv_buttonBackgroundColor="#4d706f"
+        app:sv_buttonImage="@drawable/ic_slider_button_img"
+        app:sv_slideText="SWIPE AFTER DONE"
+        app:sv_animateSlideText="true"
+        app:sv_strokeColor="#4d6670"
+        app:sv_slideTextColor="@android:color/white"/>
+
+</RelativeLayout>

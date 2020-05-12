@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-
-
-
     <item
         android:id="@+id/navigation_OrderHistory"
         android:icon="@drawable/ic_order_history_black_24dp"
@@ -27,8 +23,8 @@
 
     <item
         android:id="@+id/navigation_CheckOutBag"
-        android:icon="@drawable/ic_check_out_bag_24px"
-        android:title="@string/checkout_bag" />
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="@string/cart" />
 
 
 </menu>

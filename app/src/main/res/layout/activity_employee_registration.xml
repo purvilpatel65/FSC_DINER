@@ -1,173 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/green_gradient_background"
+    android:background="#E04462"
     tools:context=".controller.EmployeeRegistration">
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/red_round_border"
-        android:drawableEnd="@drawable/ic_check"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:onClick="completeRegistration"
-        android:paddingStart="50dp"
-        android:paddingEnd="25dp"
-        android:text="@string/registration"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView9"
-        style="@style/TextHighlight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:fontFamily="sans-serif-condensed"
+        android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/registration3"
-        android:textColor="@android:color/black"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        android:textColor="@android:color/white"
+        android:textSize="26sp" />
+
+
+    <EditText
+        android:id="@+id/employeeRegFirstName"
+        style="@style/credentials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/white_square_text_border"
+        android:drawableStart="@drawable/ic_person_outline"
+        android:ems="10"
+        android:hint="@string/first_name"
+        android:inputType="textPersonName"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:id="@+id/employeeRegLastName"
+        style="@style/credentials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/white_square_text_border"
+        android:drawableStart="@drawable/ic_person_outline"
+        android:ems="10"
+        android:hint="@string/last_name"
+        android:inputType="textPersonName"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:id="@+id/employeeRegEmail"
+        style="@style/credentials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/white_square_text_border"
+        android:drawableStart="@drawable/ic_mail_outline_black"
+        android:ems="10"
+        android:hint="@string/hint_email"
+        android:inputType="textEmailAddress"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="5dp" />
+
+    <EditText
+        android:id="@+id/employeeRegPassword"
+        style="@style/credentials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/white_square_text_border"
+        android:drawableStart="@drawable/ic_lock_outline"
+        android:ems="10"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="5dp" />
+
+
+    <EditText
+        android:id="@+id/employeeRegConfirmPassword"
+        style="@style/credentials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/white_square_text_border"
+        android:drawableStart="@drawable/ic_lock_outline"
+        android:ems="10"
+        android:hint="@string/hint_confirm_password"
+        android:inputType="textPassword"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="5dp" />
+
+
+    <EditText
+        android:id="@+id/employeeRegCode"
+        style="@style/credentials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/white_square_text_border"
+        android:drawableStart="@drawable/ic_key_outline"
+        android:ems="10"
+        android:hint="@string/hint_employee_code"
+        android:inputType="textPassword"
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="5dp" />
+
+    <Spinner
+        android:id="@+id/employeeRestaurant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/white_square_text_border"
+        android:paddingTop="8dp"
+        android:paddingEnd="5dp"
+        android:paddingBottom="8dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:textAlignment="center"
+        android:layout_width="240dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/clear_cart_button"
+        android:drawableEnd="@drawable/ic_check"
+        android:paddingStart="40dp"
+        android:paddingEnd="30dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:onClick="completeRegistration"
+        android:text="@string/registration"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/returnToLoginPageTV"
-        style="@style/TextHighlight"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed-medium"
         android:onClick="returnToLogin"
         android:text="@string/return_to_login"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="340dp"
-        android:layout_height="365dp"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/white_gradient_color"
-        android:fontFamily="sans-serif-condensed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9">
 
-        <EditText
-            android:id="@+id/employeeRegLastName"
-            style="@style/credentials"
-            android:layout_width="300dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/rounded_text_border"
-            android:drawableStart="@drawable/ic_person_outline"
-            android:ems="10"
-            android:hint="@string/last_name"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/employeeRegFirstName" />
-
-        <EditText
-            android:id="@+id/employeeRegEmail"
-            style="@style/credentials"
-            android:layout_width="300dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/rounded_text_border"
-            android:drawableStart="@drawable/ic_mail_outline_black"
-            android:ems="10"
-            android:hint="@string/hint_email"
-            android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/employeeRegLastName" />
-
-        <EditText
-            android:id="@+id/employeeRegPassword"
-            style="@style/credentials"
-            android:layout_width="300dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/rounded_text_border"
-            android:drawableStart="@drawable/ic_lock_outline"
-            android:ems="10"
-            android:hint="@string/hint_password"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/employeeRegEmail" />
-
-        <EditText
-            android:id="@+id/employeeRegFirstName"
-            style="@style/credentials"
-            android:layout_width="300dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/rounded_text_border"
-            android:drawableStart="@drawable/ic_person_outline"
-            android:ems="10"
-            android:hint="@string/first_name"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <EditText
-            android:id="@+id/employeeRegConfirmPassword"
-            style="@style/credentials"
-            android:layout_width="300dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/rounded_text_border"
-            android:drawableStart="@drawable/ic_lock_outline"
-            android:ems="10"
-            android:hint="@string/hint_confirm_password"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/employeeRegPassword" />
-
-        <EditText
-            android:id="@+id/employeeRegCode"
-            style="@style/credentials"
-            android:layout_width="300dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/rounded_text_border"
-            android:drawableStart="@drawable/ic_key_outline"
-            android:ems="10"
-            android:hint="@string/hint_employee_code"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/employeeRegConfirmPassword" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

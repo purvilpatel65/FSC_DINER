@@ -1,104 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/dialog_background"
     android:orientation="vertical"
-    android:layout_width="400dp"
-    android:layout_height="450dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/add_food_item_dialog">
 
     <TextView
         android:id="@+id/addFoodItemLabel"
+        style="@style/TextHighlight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Add Item"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginTop="5dp"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Add Menu Item"
+        android:textColor="#000"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/dialog_food_item_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Item Name"
         android:layout_below="@+id/addFoodItemLabel"
-        android:layout_marginTop="50dp"
-        />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/white_square_text_border"
+        android:fontFamily="@font/open_sans_bold"
+        android:hint="Item Name"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp" />
 
-    <EditText
-        android:id="@+id/dialog_food_item_price"
-        android:layout_width="150dp"
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Item Price ($)"
-        android:layout_below="@+id/dialog_food_item_name"
-        android:layout_marginTop="50dp"
-        android:inputType="numberDecimal"
-        />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/dialog_food_item_calories"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:hint="Item Calories"
-        android:layout_below="@+id/dialog_food_item_name"
-        android:layout_toEndOf="@+id/dialog_food_item_price"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
-        android:inputType="number"
-        />
+        <EditText
+            android:id="@+id/dialog_food_item_price"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/white_square_text_border"
+            android:fontFamily="@font/open_sans_bold"
+            android:hint="Item Price ($)"
+            android:inputType="numberDecimal"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" />
 
-    <Button
-        android:id="@+id/addFoodImageButtonDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Image"
-        android:layout_below="@+id/dialog_food_item_price"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="10dp"
-        android:background="@drawable/card_view_button_shape"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/dialog_food_item_calories"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dialog_food_item_name"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/white_square_text_border"
+            android:fontFamily="@font/open_sans_bold"
+            android:hint="Item Calories"
+            android:inputType="number"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/foodImageNamePopUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/addFoodImageButtonDialog"
         android:layout_below="@+id/dialog_food_item_price"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="20dp"
-        android:text="No Image Selected"/>
+        android:layout_gravity="start"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/addFoodImageButtonDialog"
+        android:fontFamily="@font/open_sans_bold"
+        android:paddingStart="10dp"
+        android:text="Image Status: None Selected"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/addFoodImageButtonDialog"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/change_password_button_border"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Add Image"
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/foodItemSaveButtonDialog"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/change_password_button_border"
+        android:fontFamily="@font/open_sans_bold"
         android:text="Save"
-        android:background="@drawable/card_view_button_shape"
-        android:layout_marginLeft="100dp"
-        android:layout_marginBottom="10dp"
-        />
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/foodItemCancelButtonDialog"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/clear_cart_button"
+        android:fontFamily="@font/open_sans_bold"
         android:text="Cancel"
-        android:layout_marginLeft="30dp"
-        android:background="@drawable/card_view_button_shape"
-        android:layout_toEndOf="@+id/foodItemSaveButtonDialog"
-        android:layout_marginBottom="10dp"/>
+        android:textColor="@android:color/white" />
 
-    <ProgressBar
-        android:id="@+id/foodItemAddProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        />
-
-
-
-</RelativeLayout>
+</LinearLayout>

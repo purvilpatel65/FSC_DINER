@@ -3,21 +3,15 @@ package com.example.fsc_diner.controller;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
 import com.example.fsc_diner.R;
 import com.example.fsc_diner.controller.adapter.FoodItemsAdapter;
-import com.example.fsc_diner.model.FoodItem;
 import com.example.fsc_diner.model.FoodItemInfo;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,9 +19,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +26,10 @@ import ru.nikartm.support.ImageBadgeView;
 
 public class RestaurantFoodMenu extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private List<FoodItemInfo> itemList = new ArrayList<>();
 
-    private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-    private FirebaseAuth mAuth;
     private String uid;
 
     private String restaurantKey;
@@ -57,17 +44,16 @@ public class RestaurantFoodMenu extends AppCompatActivity {
         restaurantKey = getIntent().getStringExtra("RestaurantKey");
         restaurantName = getIntent().getStringExtra("RestaurantName");
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("Images");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Restaurant").child(restaurantKey).child("Menu");
-        mAuth = FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
         uid = mAuth.getUid();
 
         setUpToolBar();
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.menu_list);
+        RecyclerView mRecyclerView = findViewById(R.id.menu_list);
         mRecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new FoodItemsAdapter(getBaseContext(), itemList, restaurantName);
@@ -119,7 +105,7 @@ public class RestaurantFoodMenu extends AppCompatActivity {
 
     private void setUpToolBar(){
 
-        androidx.appcompat.widget.Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        androidx.appcompat.widget.Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -127,7 +113,7 @@ public class RestaurantFoodMenu extends AppCompatActivity {
 
         ((TextView)myToolbar.findViewById(R.id.food_menu_toolbar_title)).setText(restaurantName + " Menu");
 
-        badgeView = (ImageBadgeView)myToolbar.findViewById(R.id.food_menu_badge_view);
+        badgeView = myToolbar.findViewById(R.id.food_menu_badge_view);
 
         badgeView.setOnClickListener(new View.OnClickListener() {
             @Override

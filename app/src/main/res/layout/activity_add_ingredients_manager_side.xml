@@ -4,45 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.AddIngredientsManagerSide">
+    tools:context=".controller.AddIngredientsManagerFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar_food_ingredients"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
         android:elevation="4dp"
-        tools:ignore="MissingConstraints"
-        android:background="@color/colorPrimary">
+        tools:ignore="MissingConstraints">
 
         <ImageButton
             android:id="@+id/food_ingredients_toolbar_back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back_pressed"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_back_pressed" />
 
         <TextView
             android:id="@+id/toolbar_title_food_ingredients"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:textColor="@android:color/white"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:layout_gravity="center" />
+            android:fontFamily="@font/open_sans_bold"/>
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
+        android:background="#FFFF"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/my_toolbar_food_ingredients"
-        android:layout_marginTop="15dp"
         android:fillViewport="true">
 
         <com.diegodobelo.expandingview.ExpandingList
+            android:background="#FFF"
             android:id="@+id/expanding_list_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
      </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -51,9 +52,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="70dp"
+        android:backgroundTint="@color/red"
         android:src="@drawable/ic_add_black_24dp"
-        android:onClick="onIngredientCategoryAdd"
-        android:layout_margin="16dp" />
-
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/red" />
 
 </RelativeLayout>
