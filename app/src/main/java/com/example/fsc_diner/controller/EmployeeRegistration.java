@@ -102,7 +102,7 @@ public class EmployeeRegistration extends AppCompatActivity {
                     startActivity(i);
                     Animatoo.animateFade(EmployeeRegistration.this);
                     finish();
-                }
+                } 
             }
         };
 
