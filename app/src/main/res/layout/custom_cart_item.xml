@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="15dp">
+    android:layout_marginTop="10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cart_item_cardview"
@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp">
 
         <RelativeLayout
-            android:background="@drawable/white_round_border"
+            android:background="@drawable/white_square_text_border"
             android:id="@+id/cart_item_relative_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

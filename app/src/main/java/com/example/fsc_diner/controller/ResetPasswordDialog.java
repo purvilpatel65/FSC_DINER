@@ -25,8 +25,6 @@ import java.util.regex.Pattern;
 
 public class ResetPasswordDialog extends DialogFragment {
 
-    private Button resetPwButton;
-    private TextView closeFragment;
     private TextView enterPasswordChangeTV;
     private TextView confirmPasswordChangeTV;
 
@@ -45,8 +43,8 @@ public class ResetPasswordDialog extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_change_password, container, false);
-        resetPwButton = view.findViewById(R.id.updatePasswordButton);
-        closeFragment = view.findViewById(R.id.closePWFragmentTV);
+        Button resetPwButton = view.findViewById(R.id.updatePasswordButton);
+        TextView closeFragment = view.findViewById(R.id.closePWFragmentTV);
         enterPasswordChangeTV = view.findViewById(R.id.enterPasswordChangeTV);
         confirmPasswordChangeTV = view.findViewById(R.id.confirmPasswordChangeTV);
 
@@ -70,14 +68,7 @@ public class ResetPasswordDialog extends DialogFragment {
                         }
                     });
                 }
-                /**
-                FirebaseAuth.getInstance().signOut();
 
-                Intent i = new Intent(v.getContext(), LoginActivity.class);
-                Toast.makeText(v.getContext(), R.string.logout4, Toast.LENGTH_SHORT).show();
-                startActivity(i);
-                getActivity().finish();
-                 **/
             }
         });
         closeFragment.setOnClickListener(new View.OnClickListener() {
@@ -105,11 +96,11 @@ public class ResetPasswordDialog extends DialogFragment {
             enterPasswordChangeTV.setError("Missing password field");
             confirmPasswordChangeTV.setError("Missing confirmed password field");
             return false;
-        } else if (password.isEmpty() && confirmedPassword.isEmpty() == false) {
+        } else if (password.isEmpty() && !confirmedPassword.isEmpty()) {
             enterPasswordChangeTV.setError("Missing password field");
             confirmPasswordChangeTV.setError(null);
             return false;
-        } else if (confirmedPassword.isEmpty() && password.isEmpty() == false) {
+        } else if (confirmedPassword.isEmpty() && !password.isEmpty()) {
             confirmPasswordChangeTV.setError("Missing password field");
             enterPasswordChangeTV.setError(null);
             return false;

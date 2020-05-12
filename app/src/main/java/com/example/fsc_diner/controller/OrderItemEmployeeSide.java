@@ -38,7 +38,6 @@ public class OrderItemEmployeeSide extends AppCompatActivity {
     private String resKey = "";
     private String customerUid = "";
     private boolean isVisitor = true;
-    private String handledBy = "";
 
     private ImageButton toolbarBackButton;
     private TextView orderIdTv;
@@ -48,12 +47,9 @@ public class OrderItemEmployeeSide extends AppCompatActivity {
     private TextView statusTv;
     private SlideView slideButton;
 
-
-    private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private List<OrderItem> employeeOrderItems = new ArrayList<OrderItem>();
-    private List<OrderItem> checkedItemList = new ArrayList<OrderItem>();
+    private List<OrderItem> employeeOrderItems = new ArrayList<>();
+    private List<OrderItem> checkedItemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,10 +77,10 @@ public class OrderItemEmployeeSide extends AppCompatActivity {
         statusTv = findViewById(R.id.employee_order_items_status);
         slideButton = findViewById(R.id.employee_order_items_slider_button);
 
-        mRecyclerView = findViewById(R.id.employee_order_items_recycler_view);
+        RecyclerView mRecyclerView = findViewById(R.id.employee_order_items_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(OrderItemEmployeeSide.this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(OrderItemEmployeeSide.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new EmployeeOrderItemsAdapter(OrderItemEmployeeSide.this, employeeOrderItems, isVisitor, new EmployeeOrderItemsAdapter.OnItemCheckListener() {
@@ -102,7 +98,7 @@ public class OrderItemEmployeeSide extends AppCompatActivity {
 
         setToolbar();
 
-        if(orderStatus == 4 || (orderStatus == 3 && isVisitor==true)) slideButton.setVisibility(View.GONE);
+        if(orderStatus == 4 || (orderStatus == 3 && isVisitor)) slideButton.setVisibility(View.GONE);
 
     }
 
@@ -110,6 +106,7 @@ public class OrderItemEmployeeSide extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
+        employeeOrderItems.clear();
         populateOrderInfo();
 
         if(orderStatus == 4 || orderStatus == 3) {

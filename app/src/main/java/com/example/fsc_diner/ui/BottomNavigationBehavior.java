@@ -1,11 +1,9 @@
 package com.example.fsc_diner.ui;
 
 import android.content.Context;
-
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
-
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.ViewCompat;

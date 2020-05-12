@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
-            android:background="@drawable/white_round_border"
+            android:background="@drawable/white_square_text_border"
             android:id="@+id/current_order_relative_layout_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">

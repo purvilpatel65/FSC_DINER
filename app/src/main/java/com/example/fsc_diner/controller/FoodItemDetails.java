@@ -198,12 +198,12 @@ public class FoodItemDetails extends AppCompatActivity {
                                     double tempPrice = Double.parseDouble(itemPrice.getText().toString().substring(1));
                                     _tempExtraPrice = tempItemPrice*tempQnt;
 
-                                    itemPrice.setText("$" + (tempPrice + (tempItemPrice*tempQnt)));
+                                    itemPrice.setText("$" + new DecimalFormat("0.00").format((tempPrice + (tempItemPrice*tempQnt))));
                                 }
 
                                 if(index == -1 && tempBtn.isChecked()){
                                     double tempPrice = Double.parseDouble(itemPrice.getText().toString().substring(1));
-                                    itemPrice.setText("$" + (tempPrice - _tempExtraPrice));
+                                    itemPrice.setText("$" + new DecimalFormat("0.00").format((tempPrice - _tempExtraPrice)));
                                 }
                             }
                         });
@@ -226,13 +226,13 @@ public class FoodItemDetails extends AppCompatActivity {
                                         if(isChecked){
                                             int tempQnt = Integer.parseInt(qntBtn.getText().toString());
                                             double tempPrice = Double.parseDouble(itemPrice.getText().toString().substring(1));
-                                            itemPrice.setText("$" + (tempPrice + (tempSubCategoryInfo.getExtraPrice()*tempQnt)));
+                                            itemPrice.setText("$" + new DecimalFormat("0.00").format(tempPrice + (tempSubCategoryInfo.getExtraPrice()*tempQnt)));
                                         }
 
                                         if(!isChecked){
                                             int tempQnt = Integer.parseInt(qntBtn.getText().toString());
                                             double tempPrice = Double.parseDouble(itemPrice.getText().toString().substring(1));
-                                            itemPrice.setText("$" + (tempPrice - (tempSubCategoryInfo.getExtraPrice()*tempQnt)));
+                                            itemPrice.setText("$" + new DecimalFormat("0.00").format(tempPrice - (tempSubCategoryInfo.getExtraPrice()*tempQnt)));
                                         }
                                     }
                                 });

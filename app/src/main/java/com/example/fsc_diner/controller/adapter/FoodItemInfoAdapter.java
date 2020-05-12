@@ -1,42 +1,25 @@
 package com.example.fsc_diner.controller.adapter;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.provider.MediaStore;
+import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.fsc_diner.R;
-import com.example.fsc_diner.controller.AddIngredientsManagerSide;
-import com.example.fsc_diner.controller.FoodMenuManagerSide;
+import com.example.fsc_diner.controller.AddIngredientsManagerFragment;
+import com.example.fsc_diner.controller.DeleteFoodItemDialog;
+import com.example.fsc_diner.controller.EditFoodItemDialog;
 import com.example.fsc_diner.model.FoodItemInfo;
-import com.example.fsc_diner.model.RestaurantInfo;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -54,11 +37,11 @@ public class FoodItemInfoAdapter extends RecyclerView.Adapter<FoodItemInfoAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView _itemName;
-        public TextView _itemCalorie;
-        public TextView _itemPrice;
-        public ImageView _itemImage;
-        public CardView _cardView;
+        private TextView _itemName;
+        private TextView _itemCalorie;
+        private TextView _itemPrice;
+        private ImageView _itemImage;
+        private CardView _cardView;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -69,9 +52,7 @@ public class FoodItemInfoAdapter extends RecyclerView.Adapter<FoodItemInfoAdapte
             _itemPrice= itemView.findViewById(R.id.manager_food_item_price);
             _itemImage= itemView.findViewById(R.id.manager_food_item_image);
             _cardView = itemView.findViewById(R.id.manager_food_item_card_view);
-
         }
-
     }
 
     @NonNull
@@ -105,33 +86,50 @@ public class FoodItemInfoAdapter extends RecyclerView.Adapter<FoodItemInfoAdapte
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(v.getContext(), AddIngredientsManagerSide.class);
-                intent.putExtra("ItemName", tempName);
-                intent.putExtra("ItemKey", tempKey);
-                intent.putExtra("RestaurantName", _restaurantName);
-                intent.putExtra("RestaurantKey", tempResKey);
-                v.getContext().startActivity(intent);
+                Bundle args = new Bundle();
+                args.putString("ItemName",tempName);
+                args.putString("ItemKey",tempKey);
+                args.putString("RestaurantKey",tempResKey);
+                args.putString("RestaurantName", _restaurantName);
+
+
+                AddIngredientsManagerFragment aim = new AddIngredientsManagerFragment();
+                aim.setArguments(args);
+
+                FragmentTransaction fragmentTransaction = ((AppCompatActivity)v.getContext()).getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.nav_host_fragment_manager, aim);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
 
         holder._cardView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
-            public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            public void onCreateContextMenu(ContextMenu menu, final View v, ContextMenu.ContextMenuInfo menuInfo) {
 
-                menu.add("Edit").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                menu.add("Edit Menu Item").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-
-                        //do something
+                        Bundle args = new Bundle();
+                        args.putString("ItemName",tempName);
+                        args.putString("ItemKey",tempKey);
+                        args.putString("RestaurantKeyCurrent",tempResKey);
+                        EditFoodItemDialog dialog = new EditFoodItemDialog();
+                        dialog.setArguments(args);
+                        dialog.show(((AppCompatActivity)v.getContext()).getSupportFragmentManager(),"EditFood");
                         return true;
                     }
                 });
 
-                menu.add("Delete").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                menu.add("Delete Menu Item").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-
-                        //do something
+                        Bundle args = new Bundle();
+                        args.putString("ItemKey",tempKey);
+                        args.putString("RestaurantKeyCurrent",tempResKey);
+                        DeleteFoodItemDialog dialog = new DeleteFoodItemDialog();
+                        dialog.setArguments(args);
+                        dialog.show(((AppCompatActivity)v.getContext()).getSupportFragmentManager(),"DeleteFood");
                         return true;
                     }
                 });

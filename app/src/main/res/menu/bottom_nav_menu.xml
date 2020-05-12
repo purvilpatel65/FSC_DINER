@@ -23,8 +23,8 @@
 
     <item
         android:id="@+id/navigation_CheckOutBag"
-        android:icon="@drawable/ic_check_out_bag_24px"
-        android:title="@string/checkout_bag" />
+        android:icon="@drawable/ic_shopping_cart_black_24dp"
+        android:title="@string/cart" />
 
 
 </menu>

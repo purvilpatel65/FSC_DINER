@@ -2,35 +2,29 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/light_gradient_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.MainActivityManagerSide">
+    android:paddingBottom="60dp"
+    tools:context=".controller.MainActivityManager">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:background="@color/red"
         android:elevation="4dp"
-        tools:ignore="MissingConstraints"
-        android:background="@color/colorPrimary">
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
             style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            android:layout_gravity="center" />
-
-        <TextView
-            android:id="@+id/main_activity_toolbar_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="logout"
-            android:textColor="@android:color/white"
-            android:layout_gravity="right"
-            android:layout_marginRight="10dp"/>
-
+            android:layout_gravity="center"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="Restaurants"
+            android:textColor="@android:color/white" />
     </androidx.appcompat.widget.Toolbar>
 
 
@@ -38,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/menu_list_chef_side"
-        android:layout_marginTop="51dp"
+        android:layout_marginTop="54dp"
         android:scrollbars="vertical"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -46,8 +40,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/red"
         android:src="@drawable/ic_add_black_24dp"
-        android:onClick="onRestaurantAdd"
-        android:layout_margin="16dp" />
+        android:tint="@android:color/white"
+        app:backgroundTint="@color/red" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,15 +1,10 @@
 package com.example.fsc_diner.controller;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.ProgressBar;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.example.fsc_diner.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,16 +18,12 @@ import com.google.firebase.database.ValueEventListener;
 public class SplashScreen extends AppCompatActivity {
 
     FirebaseAuth mFireBaseAuth;
-    private int progressStatus = 0;
-    private ProgressBar progressBar;
-    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mFireBaseAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        progressBar = findViewById(R.id.progressBar);
     }
 
     private void updateUI(FirebaseUser user) {
@@ -51,19 +42,16 @@ public class SplashScreen extends AppCompatActivity {
                     if(type.equals("Customer")){
                         Intent i = new Intent(SplashScreen.this, MainActivity.class);
                         startActivity(i);
-                        //Animatoo.animateFade(getApplicationContext());
                         finish();
                     }else if (type.equals("Manager")) {
-                        Intent i = new Intent(SplashScreen.this, MainActivityManagerSide.class);
+                        Intent i = new Intent(SplashScreen.this, MainActivityManager.class);
                         startActivity(i);
-                        //Animatoo.animateFade(getApplicationContext());
                         finish();
                     } else if (type.equals("Employee")) {
                         Intent i = new Intent(SplashScreen.this, MainActivityEmployee.class);
                         i.putExtra("ResKey", resKey);
                         i.putExtra("EmpName", fullName);
                         startActivity(i);
-                        //Animatoo.animateFade(getApplicationContext());
                         finish();
                     }
                 }

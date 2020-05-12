@@ -15,7 +15,7 @@
         android:id="@+id/cv">
 
         <RelativeLayout
-            android:background="@drawable/white_round_border"
+            android:background="@drawable/white_square_text_border"
             android:padding="2dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"

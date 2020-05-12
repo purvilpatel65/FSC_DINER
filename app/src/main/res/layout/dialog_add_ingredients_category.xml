@@ -1,90 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/dialog_background"
     android:orientation="vertical"
-    android:layout_width="400dp"
-    android:layout_height="350dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/add_ingredients_category_dialog">
 
     <TextView
+        style="@style/TextHighlight"
+        android:fontFamily="sans-serif-condensed-medium"
         android:id="@+id/addIngredientsCategoryLabel"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:text="Add Ingredient Category"
         android:textStyle="bold"
-        android:textSize="25dp"
-        android:textColor="@color/colorPrimary"
+        android:textSize="24dp"
+        android:textColor="#000"
         android:layout_marginTop="5dp"/>
 
     <EditText
         android:id="@+id/dialog_ingredient_category_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ingredient Category Name (Ex: Type of Bread)"
-        android:layout_below="@+id/addIngredientsCategoryLabel"
-        android:layout_marginTop="50dp"
-        />
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/white_square_text_border"
+        android:fontFamily="@font/open_sans_bold"
+        android:hint="Category Name (Ex: Type of Bread)"
+        android:paddingStart="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textSize="16sp" />
 
     <RadioGroup
         android:id="@+id/radioSelectType"
+        android:layout_marginStart="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dialog_ingredient_category_name"
-        android:layout_marginTop="20dp">
+        android:layout_below="@+id/dialog_ingredient_category_name">
 
         <RadioButton
             android:id="@+id/radioSingleSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/radioBtn_single_select"
-            android:checked="true" />
+            android:checked="true"
+            android:fontFamily="@font/open_sans_bold"
+            android:text="@string/radioBtn_single_select" />
 
         <RadioButton
             android:id="@+id/radioMultipleSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_bold"
             android:text="@string/radioBtn_multiple_select" />
 
         <RadioButton
             android:id="@+id/radioNoSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_bold"
             android:text="@string/radioBtn_no_select" />
 
     </RadioGroup>
 
     <Button
         android:id="@+id/saveIngredientCategoryButtonDialog"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/change_password_button_border"
+        android:fontFamily="@font/open_sans_bold"
         android:text="Save"
-        android:background="@drawable/card_view_button_shape"
-        android:layout_marginLeft="100dp"
-        android:layout_marginBottom="10dp"
-        />
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/cancelIngredientCategoryButtonDialog"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/clear_cart_button"
+        android:fontFamily="@font/open_sans_bold"
         android:text="Cancel"
-        android:layout_marginLeft="30dp"
-        android:background="@drawable/card_view_button_shape"
-        android:layout_toEndOf="@+id/saveIngredientCategoryButtonDialog"
-        android:layout_marginBottom="10dp"/>
+        android:textColor="@android:color/white" />
 
-    <ProgressBar
-        android:id="@+id/ingredientCategoryProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        />
-
-
-
-</RelativeLayout>
+</LinearLayout>

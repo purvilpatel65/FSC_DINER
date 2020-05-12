@@ -1,7 +1,5 @@
 package com.example.fsc_diner.ui.ordersHistory;
 
-import androidx.lifecycle.ViewModelProviders;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,35 +22,28 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ordersHistory extends Fragment {
 
-    private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private List<HistoryItem> historyItems = new ArrayList<>();
-
     private DatabaseReference mDatabaseRef;
     private String userUid;
 
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        OrdersHistoryViewModel ordersHistoryViewModel = ViewModelProviders.of(this).get(OrdersHistoryViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_orders_history, container, false);
 
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
         userUid = FirebaseAuth.getInstance().getUid();
 
-        mRecyclerView = (RecyclerView) root.findViewById(R.id.customer_history_recycler_view);
+        RecyclerView mRecyclerView = root.findViewById(R.id.customer_history_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new HistoryAdapter(getContext(), historyItems, FirebaseAuth.getInstance().getUid());
@@ -64,7 +55,7 @@ public class ordersHistory extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-
+        historyItems.clear();
         addHistoryItemList();
     }
 

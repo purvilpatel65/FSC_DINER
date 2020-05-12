@@ -1,7 +1,7 @@
 <resources>
     <string name="active_orders">Active Orders will appear below</string>
     <string name="active_orders_drawer">Active Orders</string>
-    <string name="app_name">FSC Diner</string>
+    <string name="app_name">FSC Dine</string>
     <string name="about_us_version">Version: 1.0.1</string>
     <string name="account_delete_success">Your account has been successfully deleted</string>
     <string name="account_delete_unsuccessful">Your account has not been deleted</string>
@@ -22,6 +22,10 @@
     <string name="delete_account">Delete account</string>
     <string name="delete_account_fragment">Are you sure you want to delete your account?</string>
     <string name="delete_account_confirm">Yes, Delete Account</string>
+    <string name="delete_menu_item_textview">Are you sure you want to delete this menu item?</string>
+    <string name="delete_restaurant_label">Delete Restaurant</string>
+    <string name="delete_restaurant_textview">Are you sure you want to delete this restaurant? If so, enter the restaurant name to confirm deletion</string>
+    <string name="delete_restaurant_yes">Yes, Delete Restaurant</string>
     <string name="email_address">Email:</string>
     <string name="email_address_confirm">Enter email to confirm deletion</string>
     <string name="enter_new_password">Enter new password</string>
@@ -85,6 +89,7 @@
     <string name="clear_cart">Clear Cart</string>
     <string name="clear_all_items">Clear all items from cart?</string>
 
+    <string name="cart">Cart</string>
     <string name="yescc">Yes, clear cart</string>
     <string name="nocc">No, return to cart</string>
     <string name="title_menu">Menu</string>
@@ -95,6 +100,7 @@
     <string name="title_activity_scrolling">ScrollingActivity</string>
 
     <string name="restaurant_1_name">Burger Studio</string>
+    <string name="restaurant_drawer">Edit Restaurants</string>
 
     <string name="radioBtn_multiple_select">Multiple Select</string>
     <string name="radioBtn_single_select">Single Select</string>

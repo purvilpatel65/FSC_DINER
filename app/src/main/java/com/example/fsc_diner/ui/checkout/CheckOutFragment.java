@@ -7,24 +7,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.fsc_diner.R;
 import com.example.fsc_diner.controller.adapter.CartItemAdapter;
 import com.example.fsc_diner.model.CartItem;
 import com.example.fsc_diner.model.OrderItem;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.wallet.IsReadyToPayRequest;
-import com.google.android.gms.wallet.PaymentsClient;
-import com.google.android.gms.wallet.Wallet;
-import com.google.android.gms.wallet.WalletConstants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -32,63 +25,38 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 
 public class CheckOutFragment extends Fragment {
 
-    private CheckOutViewModel checkOutViewModel;
-    private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
-    private DatabaseReference databaseReference;
-    private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth mAuth;
     private String uid;
     private String userEmail;
-    private String userName;
 
-    private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private List<CartItem> cartItem = new ArrayList<>();
 
-    private Button clearCartButton;
-    private Button payNowButton;
     private TextView subtotalTV;
 
-    private PaymentsClient paymentsClient;
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        checkOutViewModel =
-                ViewModelProviders.of(this).get(CheckOutViewModel.class);
         View root = inflater.inflate(R.layout.fragment_check_out, container, false);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("Images");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Users");
         mAuth = FirebaseAuth.getInstance();
 
-        Wallet.WalletOptions walletOptions = new Wallet.WalletOptions.Builder().setEnvironment(WalletConstants.ENVIRONMENT_TEST).build();
-        paymentsClient = Wallet.getPaymentsClient(getContext(), walletOptions);
-
         uid = mAuth.getUid();
-        mRecyclerView = root.findViewById(R.id.cart_item_recycler_view);
-        clearCartButton = root.findViewById(R.id.clear_cart_button);
-        payNowButton = root.findViewById(R.id.payNowButton);
+        RecyclerView mRecyclerView = root.findViewById(R.id.cart_item_recycler_view);
+        Button clearCartButton = root.findViewById(R.id.clear_cart_button);
+        Button payNowButton = root.findViewById(R.id.payNowButton);
         subtotalTV = root.findViewById(R.id.subtotalTV);
         mRecyclerView.setHasFixedSize(true);
 
-        mLayoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new CartItemAdapter(getContext(), cartItem);
@@ -115,8 +83,8 @@ public class CheckOutFragment extends Fragment {
             }
         });
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("Users").child(FirebaseAuth.getInstance().getUid()).child("Cart");
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("Users").child(FirebaseAuth.getInstance().getUid()).child("Cart");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -237,7 +205,6 @@ public class CheckOutFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userEmail = dataSnapshot.child("email").getValue(String.class);
-                userName = dataSnapshot.child("firstName").getValue(String.class) + " " + dataSnapshot.child("lastName").getValue(String.class);
             }
 
             @Override

@@ -126,32 +126,6 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
-    /**
-    // This here below is optional
-    public void updateUI(FirebaseUser user) {
-
-        if (user != null) {
-            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(i);
-            Animatoo.animateFade(this);
-            finish();
-        } else {
-            recreate();
-            finish();
-        }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mFireBaseAuth.getCurrentUser();
-        if (currentUser != null) {
-            updateUI(currentUser);
-        }
-    }
-    **/
-
     private void updateUI(FirebaseUser user) {
 
         if(user != null) {
@@ -170,19 +144,16 @@ public class LoginActivity extends AppCompatActivity {
                     if(type.equals("Customer")){
                         Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(i);
-                        //Animatoo.animateFade((Activity)getApplicationContext());
                         finish();
                     }else if (type.equals("Manager")) {
-                        Intent i = new Intent(LoginActivity.this, MainActivityManagerSide.class);
+                        Intent i = new Intent(LoginActivity.this, MainActivityManager.class);
                         startActivity(i);
-                        //Animatoo.animateFade(getApplicationContext());
                         finish();
                     } else if (type.equals("Employee")) {
                         Intent i = new Intent(LoginActivity.this, MainActivityEmployee.class);
                         i.putExtra("ResKey", resKey);
                         i.putExtra("EmpName", fullName);
                         startActivity(i);
-                        //Animatoo.animateFade(getApplicationContext());
                         finish();
                     }else{
                         recreate();

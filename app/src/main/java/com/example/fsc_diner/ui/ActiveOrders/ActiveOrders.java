@@ -127,7 +127,7 @@ public class ActiveOrders extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
-
+        employeeOrders.clear();
         addEmployeeOrdersList();
     }
 }

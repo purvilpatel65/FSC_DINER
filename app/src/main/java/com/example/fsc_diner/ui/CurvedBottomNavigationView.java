@@ -114,7 +114,6 @@ public class CurvedBottomNavigationView extends BottomNavigationView {
         mPath.close();
     }
 
-
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

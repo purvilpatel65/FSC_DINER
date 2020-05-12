@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/dialog_background"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/add_restaurant_dialog"
+    tools:context=".controller.DeleteRestaurantDialog">
+
+    <TextView
+        style="@style/TextHighlight"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Delete Restaurant"
+        android:textColor="#000"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:textAlignment="center"
+        android:text="@string/delete_restaurant_textview"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/delete_dialog_restaurant_name"
+        android:background="@drawable/white_square_text_border"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingStart="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/open_sans_bold"
+        android:hint="Restaurant Name" />
+
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/deleteRestaurantButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/change_password_button_border"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Yes, Delete Restaurant"
+        android:textColor="#FFF" />
+
+    <Button
+
+        android:layout_gravity="center"
+        android:id="@+id/cancelButtonDialog"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_toEndOf="@+id/saveButtonDialog"
+        android:background="@drawable/clear_cart_button"
+        android:fontFamily="@font/open_sans_bold"
+        android:text="Cancel"
+        android:textColor="#FFF" />
+
+
+
+
+</LinearLayout>

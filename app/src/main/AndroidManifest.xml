@@ -11,16 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.MainActivityEmployee"></activity>
+        <activity android:name=".controller.MainActivityManager"></activity>
+        <activity android:name=".controller.MainActivityEmployee" />
         <activity
             android:name=".controller.FoodItemDetails"
             android:parentActivityName=".controller.RestaurantFoodMenu" />
-        <activity
-            android:name=".controller.AddIngredientsManagerSide"
-            android:parentActivityName=".controller.FoodMenuManagerSide" />
-        <activity
-            android:name=".controller.FoodMenuManagerSide"
-            android:parentActivityName=".controller.MainActivityManagerSide" />
         <activity android:name=".controller.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,17 +28,15 @@
             android:parentActivityName=".controller.MainActivity" />
         <activity
             android:name=".controller.LoginActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
         <activity android:name=".controller.MainActivity" />
         <activity android:name=".controller.UserRegistration" />
         <activity android:name=".controller.EmployeeRegistration" />
-        <activity android:name=".controller.MainActivityManagerSide" />
         <activity android:name=".controller.OrderItemEmployeeSide" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />

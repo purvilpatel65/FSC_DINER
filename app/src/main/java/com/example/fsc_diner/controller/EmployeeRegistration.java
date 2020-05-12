@@ -51,7 +51,7 @@ public class EmployeeRegistration extends AppCompatActivity {
                     "(?=.*[0-9])" +         //1 digit minimum
                     "(?=.*[a-z])" +         //1 lowercase letter minimum
                     "(?=.*[A-Z])" +         //1 lowercase letter maximum
-                    "(?=.*[@#$%^&+=])" +    //1 special character minimum
+                    "(?=.*[@#$!%^&+=])" +    //1 special character minimum
                     "(?=\\S+$)" +           //no spaces allowed
                     ".{7,}" +               //7 character minimum
                     "$");
@@ -138,7 +138,7 @@ public class EmployeeRegistration extends AppCompatActivity {
         if (firstNameTV.getText().toString().equals("")) {
             firstNameTV.setError("Missing first name field");
             return false;
-        } else if (firstNameTV.getText().toString().length() <= 3 && firstNameTV.getText().toString().length() > 0) {
+        } else if (firstNameTV.getText().toString().length() < 3 && firstNameTV.getText().toString().length() > 0) {
             firstNameTV.setError("First name must be at least 3 characters long");
             return false;
         } else if (firstNameTV.getText().toString().length() > 30) {
@@ -339,7 +339,6 @@ public class EmployeeRegistration extends AppCompatActivity {
 
                 int tempIndex = resName.indexOf(parent.getItemAtPosition(position).toString());
                 selectedRestaurantKey = resKey.get(tempIndex);
-
             }
 
             @Override

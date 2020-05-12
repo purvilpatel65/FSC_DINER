@@ -4,44 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/light_gradient_background"
+    android:background="#E04462"
     android:orientation="vertical"
     tools:context=".controller.SplashScreen">
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="213dp"
-        android:layout_height="212dp"
+        android:layout_width="182dp"
+        android:layout_height="179dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:background="@drawable/circular_splash_border"
-        android:elevation="30dp"
+        android:elevation="50dp"
         android:padding="7dp"
-        app:srcCompat="@drawable/fsc_ram_splash" />
+        app:srcCompat="@drawable/fsc_dine_logo_border_splash" />
 
     <ProgressBar
-        android:elevation="50dp"
         android:id="@+id/progressBar"
-        android:indeterminateDuration="1"
-        android:layout_width="94dp"
-        android:layout_height="75dp"
+        android:layout_width="72dp"
+        android:layout_height="59dp"
         android:layout_gravity="center"
         android:layout_marginStart="40dp"
         android:layout_marginTop="100dp"
-        android:layout_marginEnd="40dp" />
+        android:layout_marginEnd="40dp"
+        android:elevation="50dp"
+        android:indeterminateDuration="1"
+        android:indeterminateTint="@android:color/white" />
 
     <TextView
-        android:elevation="50dp"
         android:id="@+id/textView6"
-        style="@style/TextHighlight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
-        android:fontFamily="@font/open_sans_semibold"
+        android:elevation="50dp"
+        android:fontFamily="sans-serif"
         android:text="@string/about_us_version"
         android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="25sp"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 </LinearLayout>
